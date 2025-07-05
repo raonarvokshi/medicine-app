@@ -1,6 +1,33 @@
 <%- include("partials/header.ejs") %>
-    <%- include("partials/navbar.ejs") %>
-    <div class="container mt-5 text-center">
-        <h1>App</h1>
+<%- include("partials/navbar.ejs") %>
+
+<div class="container mt-5">
+  <div class="row mt-5 pt-5 justify-content-center">
+    <div class="col-lg-6 first-col" data-aos="fade-right" data-aos-delay="170">
+      <div class="wrapper">
+        <h1 class="text-info">Modern Medical Platform</h1>
+        <p class="fs-5">
+            Easily manage doctors, patients, and appointments.  
+            Chat live, set diagnoses, and offer modern healthcare  
+            — all in one powerful platform.
+        </p>
+
+        <% if (!locals.user) {%>
+          <a href="/login" class="btn btn-info btn-lg rounded-3 text-light">
+            Get Started for Free <i class="ms-1 fa-solid fa-right-from-bracket"></i>
+          </a>
+        <% } else { %>
+          <a href="#" class="btn btn-info btn-lg rounded-3 text-light">
+            Dashboard&nbsp; <i class="fa-solid fa-chart-simple"></i>
+          </a>
+        <% } %>
+      </div>
     </div>
+
+    <div class="col-lg-6 mt-5 pt-5" data-aos="fade-left" data-aos-delay="170">
+      <img src="/images/hero.png" alt="" class="img-fluid w-75 mx-auto d-block">
+    </div>
+  </div>
+</div>
+
 <%- include("partials/footer.ejs") %>

@@ -1,3 +1,7 @@
+.first-col {
+    margin-top: 200px;
+}
+
 .login-container {
     margin-top: 8em;
     max-width: 1000px;
@@ -76,6 +80,7 @@
     align-items: center;
     gap: 8px;
     width: 90%;
+    border-radius: 5px;
 }
 
 .custom-dropdown-menu .logout {
@@ -159,7 +164,31 @@
     background-color: #f8f9fa;
 }
 
-.view-doc {
+.m-bottom {
     margin-top: 0;
     margin-bottom: 10px;
 }
+
+.link {
+    position: relative;
+    overflow: hidden;
+}
+
+.link::after {
+    content: "";
+    display: block;
+    height: 3px;
+    width: 100%;
+    background-color: #fff;
+    transform: scale(0);
+    transform-origin: left;
+    transition: all 0.3s ease;
+}
+
+.link:hover::after {
+    transform: scale(1);
+}
+
+/* .link {
+    transition: all 0.3s ease-in !important;
+} */

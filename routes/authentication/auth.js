@@ -59,10 +59,6 @@ router.get("/register", authenticatedUsers, (req, res) => {
 
 router.post("/register", async (req, res) => {
     const { username, email, password } = req.body;
-    console.log(username, email, password);
-
-    // TODO: DUHET ME KQYR NESE EMAILA EGZISTON (NESE PO REDIRECT ME ERROR MSG)
-    // TODO: NESE EMAILA NUK EGZISTON REGJISTRO EDHE BEJE REDIRECT NHOME PAGE
 
     try {
         const result = await db.query("SELECT * FROM users WHERE email = $1", [email]);
