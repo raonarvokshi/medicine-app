@@ -1,0 +1,56 @@
+<%- include("../partials/header.ejs") %>
+    <%- include("../partials/navbar.ejs") %>
+  <div class="container login-container shadow-lg p-5 rounded-5">
+    <div class="row">
+      <div class="col-lg-6 d-none d-lg-block">
+        <img src="/images/login.png" alt="" class="img-fluid pe-5">
+      </div>
+      <div class="col-lg-6">
+        <h1 class="border-bottom border-3 border-info d-inline-block">Welcome back</h1>
+        <p>
+          <span class="text-muted">Don't have an account?</span> 
+          <a href="/register" class="register-link text-decoration-none">Create one</a>
+        </p>
+        <form action="/login" method="POST" class="mt-4">
+            <div class="mb-4">
+              <label for="email" class="form-label">Email</label>
+              <input type="email" class="form-control" id="email" name="email" placeholder="Email..." required>
+            </div>
+            
+            <div class="mb-4">
+              <label for="password" class="form-label">Password</label>
+              <input type="password" class="form-control" id="password" name="password" placeholder="Password..." required>
+            </div>
+            
+            <button type="submit" class="btn btn-info btn-lg w-100 text-light">Log in</button>
+            <% if (locals.error) { %>
+              <div id="error-msg" class="text-danger mt-3"><%= error %></div>
+            <% } %>
+            <% if (locals.success) { %>
+              <div id="success-msg" class="text-success"><%= success %></div>
+            <% } %>
+          </form>
+        </div>
+    </div>
+  </div>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  <script>
+      $(document).ready(function () {
+          const errorMsg = $("#error-msg");
+          const successMsg = $("#success-msg");
+
+          if (errorMsg.length) {
+              setTimeout(() => {
+                  errorMsg.fadeOut("slow");
+              }, 5000);
+          }
+
+          if (successMsg.length) {
+              setTimeout(() => {
+                successMsg.fadeOut("slow");
+              }, 5000);
+          }
+      });
+  </script>
+
+<%- include("../partials/footer.ejs") %>
