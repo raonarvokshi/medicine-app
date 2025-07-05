@@ -8,7 +8,7 @@ import JWT_SECRET from "../../index.js";
 const router = express.Router();
 let errorMsg;
 
-router.get("/login", (req, res) => {
+router.get("/login", authenticatedUsers, (req, res) => {
     res.render("authentication/login.ejs");
 });
 
@@ -53,7 +53,7 @@ router.post("/login", async (req, res) => {
     }
 });
 
-router.get("/register", (req, res) => {
+router.get("/register", authenticatedUsers, (req, res) => {
     res.render("authentication/register.ejs");
 });
 
