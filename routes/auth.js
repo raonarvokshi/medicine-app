@@ -1,9 +1,9 @@
 import express from "express"
-import db from "../../db.js";
-import { authenticateToken, authenticatedUsers } from "../../middlewares.js";
+import db from "../db.js";
+import { authenticateToken, authenticatedUsers } from "../middlewares.js";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
-import JWT_SECRET from "../../index.js";
+import JWT_SECRET from "../index.js";
 
 const router = express.Router();
 let errorMsg;

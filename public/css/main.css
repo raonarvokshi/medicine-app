@@ -189,6 +189,10 @@
     transform: scale(1);
 }
 
-/* .link {
-    transition: all 0.3s ease-in !important;
-} */
+.change-pass-btn {
+    margin-left: 115px;
+}
+
+.del-acc-btn {
+    margin-left: 115px;
+}

@@ -1,9 +1,10 @@
 import express from "express"
 import bodyParser from "body-parser"
 import dotenv from "dotenv";
-import auth from "./routes/authentication/auth.js"
 import cookieParser from "cookie-parser";
 import { verifyToken } from "./middlewares.js";
+import auth from "./routes/auth.js"
+import profile from "./routes/profile.js";
 
 dotenv.config();
 const app = express();
@@ -14,6 +15,7 @@ app.use(express.static("public"));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(auth);
+app.use(profile);
 
 app.get("/", verifyToken, (req, res) => {
     res.render("home.ejs", { user: req.user });
