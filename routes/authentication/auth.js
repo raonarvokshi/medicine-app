@@ -78,9 +78,11 @@ router.post("/register", async (req, res) => {
                     return res.render("auth/register.ejs", { error: errorMsg });
                 }
 
-                await db.query("INSERT INTO users (username, email, password) VALUES($1, $2, $3) RETURNING *",
+                const insertResult = await db.query("INSERT INTO users (username, email, password) VALUES($1, $2, $3) RETURNING *",
                     [username, email, hash]
                 );
+
+                const user = insertResult.rows[0];
 
                 const token = jwt.sign(
                     { id: user.id, email: user.email, username: user.username },
