@@ -51,6 +51,10 @@
     pointer-events: auto;
 }
 
+.navbar {
+    background-color: #0281b3;
+}
+
 .custom-dropdown-menu {
     display: block;
     /* Override Bootstrap toggle system */
@@ -195,4 +199,88 @@
 
 .del-acc-btn {
     margin-left: 115px;
+}
+
+/* Sidebar base */
+.sidebar {
+    height: 100vh;
+    position: fixed;
+    top: 80px;
+    /* adjust based on navbar height */
+    overflow-y: auto;
+    background-color: #15b4f3;
+}
+
+/* Main content push */
+main {
+    margin-left: 16.6667%;
+    /* 2 nga 12 kolona për sidebar-in Bootstrap */
+}
+
+
+/* Active highlight link in sidebar */
+.nav-link.active {
+    font-weight: bold;
+}
+
+.nav-link {
+    color: #fff;
+}
+
+.sidebar-link:hover {
+    background-color: #049edb;
+    color: #fff;
+}
+
+.dashboard-sidebar__link {
+    font-size: 32px;
+}
+
+/* Collapse toggle icon rotation */
+.sidebar .nav-link[aria-expanded="true"] .arrow {
+    transform: rotate(180deg);
+    transition: transform 0.3s;
+}
+
+.sidebar .nav-link[aria-expanded="true"] {
+    background-color: #048cc3;
+    color: #fff;
+}
+
+.sidebar .nav-link[aria-expanded="false"] {
+    color: #fff;
+}
+
+.menu {
+    background-color: #049edb;
+}
+
+.btn-toggle-nav li:hover a {
+    color: #bce9fb;
+}
+
+.card {
+    border-radius: 0.5rem;
+}
+
+.card-header {
+    font-weight: 600;
+    font-size: 1rem;
+}
+
+.card-footer {
+    background-color: rgba(0, 0, 0, 0.1);
+}
+
+.card .fa {
+    font-size: 1.2rem;
+}
+
+.card-title {
+    font-weight: bold;
+}
+
+.logo {
+    width: 15%;
+    height: 1%;
 }

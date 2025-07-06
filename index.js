@@ -2,7 +2,7 @@ import express from "express"
 import bodyParser from "body-parser"
 import dotenv from "dotenv";
 import cookieParser from "cookie-parser";
-import { verifyToken } from "./middlewares.js";
+import { authenticateToken, verifyToken } from "./middlewares.js";
 import auth from "./routes/auth.js"
 import profile from "./routes/profile.js";
 
@@ -19,6 +19,10 @@ app.use(profile);
 
 app.get("/", verifyToken, (req, res) => {
     res.render("home.ejs", { user: req.user });
+});
+
+app.get("/dashboard", authenticateToken, (req, res) => {
+    res.render("dashboard.ejs", { user: req.user });
 });
 
 app.listen(PORT, () => {
