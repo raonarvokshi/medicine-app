@@ -14,7 +14,7 @@
   <div class="container-fluid">
     <div class="row">
       <!-- Sidebar -->
-      <nav id="sidebarMenu" class="col-lg-2 d-lg-block sidebar collapse">
+      <nav id="sidebarMenu" class="col-lg-2 d-lg-block sidebar collapse shadow">
         <div class="position-sticky pt-3">
           <ul class="nav flex-column">
             <li class="nav-item text-center">
@@ -55,22 +55,38 @@
                 </a>
               <div class="collapse ps-3 menu" id="patientsMenu">
                 <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-                  <li><a href="/patients/add" class="nav-link">Shto pacientat</a></li>
-                  <li><a href="/patients/view" class="nav-link">Shiko pacientat</a></li>
+                  <li>
+                    <a href="/add/patient" class="nav-link">
+                      <i class="fa-solid fa-user-plus"></i>&nbsp; Shto pacient
+                    </a>
+                  </li>
+                  <li>
+                    <a href="/view/patients" class="nav-link">
+                      <i class="fas fa-users"></i>&nbsp; Shiko pacientat
+                    </a>
+                  </li>
                 </ul>
               </div>
             </li>
 
             <li class="nav-item mb-3">
                   <a class="nav-link sidebar-link d-flex align-items-center" data-bs-toggle="collapse" href="#refersMenu" role="button">
-                       <i class="fas fa-user-md"></i>&nbsp;
+                      <i class="fas fa-user-md"></i>&nbsp;
                       <span class="flex-grow-1">Referuesit</span>
                       <i class="fa-solid fa-chevron-down arrow ms-auto"></i>
                   </a>
                   <div class="collapse ps-3 menu" id="refersMenu">
                     <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-                      <li><a href="/patients/add" class="nav-link">Shto referues</a></li>
-                      <li><a href="/patients/view" class="nav-link">Shiko referuesit</a></li>
+                      <li>
+                        <a href="/patients/add" class="nav-link">
+                          <i class="fa-solid fa-user-plus"></i>&nbsp; Shto referues
+                        </a>
+                      </li>
+                      <li>
+                        <a href="/patients/view" class="nav-link">
+                          <i class="fas fa-user-md"></i>&nbsp; Shiko referuesit
+                        </a>
+                      </li>
                     </ul>
                   </div>
               </li>
@@ -81,13 +97,27 @@
                     <span class="flex-grow-1">Cilesimet</span>
                     <i class="fa-solid fa-chevron-down arrow ms-auto"></i>
                 </a>
-              <div class="collapse ps-3 menu" id="settingsMenu">
-                <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-                  <li><a href="/profile" class="nav-link">Profili</a></li>
-                  <li><a href="/change-password" class="nav-link">Ndrro fjalkalimin</a></li>
-                  <li><a href="/delete-account" class="nav-link">Fshij llogarin</a></li>
-                </ul>
-              </div>
+                <div class="collapse ps-3 menu" id="settingsMenu">
+                  <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                    <li>
+                      <a href="/profile" class="nav-link">
+                        <i class="fa-solid fa-user"></i>&nbsp; Profili
+                      </a>
+                    </li>
+
+                    <li>
+                      <a href="/change-password" class="nav-link">
+                        <i class="fa-solid fa-lock"></i>&nbsp; Ndrro fjalkalimin
+                      </a>
+                    </li>
+                    
+                    <li>
+                      <a href="/delete-account" class="nav-link">
+                        <i class="fa-solid fa-trash"></i>&nbsp; Fshij llogarin
+                      </a>
+                    </li>
+                  </ul>
+                </div>
             </li>
           </ul>
         </div>

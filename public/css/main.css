@@ -241,10 +241,12 @@ body {
 .sidebar {
     height: 100vh;
     position: fixed;
-    top: 80px;
+    top: 81px;
     /* adjust based on navbar height */
     overflow-y: auto;
-    background-color: #15b4f3;
+    /* background-color: #15b4f3; */
+    /* background-color: #e9e8e8; */
+    background-color: #fff;
 }
 
 /* Active highlight link in sidebar */
@@ -253,11 +255,12 @@ body {
 }
 
 .nav-link {
-    color: #fff;
+    color: black;
 }
 
 .sidebar-link:hover {
-    background-color: #049edb;
+    /* background-color: #049edb; */
+    background-color: #cccbcb;
     color: #fff;
 }
 
@@ -266,7 +269,7 @@ body {
 }
 
 .dashboard-sidebar__link:hover {
-    color: #fff;
+    color: inherit;
 }
 
 /* Collapse toggle icon rotation */
@@ -276,7 +279,8 @@ body {
 }
 
 .sidebar .nav-link[aria-expanded="true"] {
-    background-color: #048cc3;
+    /* background-color: #048cc3; */
+    background-color: #cccbcb;
     color: #fff;
 }
 
@@ -285,11 +289,25 @@ body {
 }
 
 .menu {
-    background-color: #049edb;
+    /* background-color: #049edb; */
+    background-color: #ebebeb;
+}
+
+/* .sidebar .nav-link,
+.sidebar .nav-link:focus,
+.sidebar .nav-link:active,
+.sidebar .nav-link.collapsed,
+.sidebar .nav-link[aria-expanded="true"] {
+    color: inherit !important;
+} */
+
+.sidebar .nav-link.collapsed {
+    color: inherit;
 }
 
 .btn-toggle-nav li:hover a {
-    color: #bce9fb;
+    /* color: #bce9fb; */
+    color: #696969;
 }
 
 .card {

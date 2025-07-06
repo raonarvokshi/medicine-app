@@ -4,67 +4,111 @@
 <div class="container-fluid">
   <div class="row">
     <!-- Sidebar -->
-      <nav id="sidebarMenu" class="col-lg-2 d-lg-block sidebar collapse">
+      <nav id="sidebarMenu" class="col-lg-2 d-lg-block sidebar collapse shadow">
         <div class="position-sticky pt-3">
           <ul class="nav flex-column">
-            <li class="nav-item text-center">
-              <a class="nav-link active dashboard-sidebar__link" href="/dashboard">
-                <i class="fa-solid fa-user"></i> <%= user.username %>
-              </a>
-            </li>
-            <hr>
-            
-            <li class="nav-item mb-3">
-                <a class="nav-link sidebar-link d-flex align-items-center" data-bs-toggle="collapse" href="#doctorsMenu" role="button">
-                    <i class="fas fa-user-md"></i>&nbsp;
-                    <span class="flex-grow-1">Doktorat</span>
-                    <i class="fa-solid fa-chevron-down arrow ms-auto"></i>
+              <li class="nav-item text-center">
+                <a class="nav-link active dashboard-sidebar__link" href="/dashboard">
+                  <i class="fa-solid fa-user"></i> <%= user.username %>
                 </a>
-                <div class="collapse menu" id="doctorsMenu">
-                    <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-                        <li class="ps-3">
-                            <a href="/add/doctor" class="nav-link">
-                                <i class="fa-solid fa-user-plus"></i>&nbsp; Shto doktor
-                            </a>
-                        </li>
+              </li>
+              <hr>
+              
+              <li class="nav-item mb-3">
+                  <a class="nav-link sidebar-link d-flex align-items-center" data-bs-toggle="collapse" href="#doctorsMenu" role="button">
+                      <i class="fas fa-user-md"></i>&nbsp;
+                      <span class="flex-grow-1">Doktorat</span>
+                      <i class="fa-solid fa-chevron-down arrow ms-auto"></i>
+                  </a>
+                  <div class="collapse menu" id="doctorsMenu">
+                      <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                          <li class="ps-3">
+                              <a href="/add/doctor" class="nav-link">
+                                  <i class="fa-solid fa-user-plus"></i>&nbsp; Shto doktor
+                              </a>
+                          </li>
 
-                        <li class="ps-3">
-                            <a href="/view/doctors" class="nav-link">
-                                <i class="fas fa-user-md"></i>&nbsp; Shiko doktorat
-                            </a>
-                        </li>
-                    </ul>
+                          <li class="ps-3">
+                              <a href="/view/doctors" class="nav-link">
+                                  <i class="fas fa-user-md"></i>&nbsp; Shiko doktorat
+                              </a>
+                          </li>
+                      </ul>
+                  </div>
+              </li>
+
+              <li class="nav-item mb-3">
+                  <a class="nav-link sidebar-link d-flex align-items-center" data-bs-toggle="collapse" href="#patientsMenu" role="button">
+                      <i class="fas fa-users"></i>&nbsp;
+                      <span class="flex-grow-1">Pacientat</span>
+                      <i class="fa-solid fa-chevron-down arrow ms-auto"></i>
+                  </a>
+                <div class="collapse ps-3 menu" id="patientsMenu">
+                  <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                    <li>
+                      <a href="/add/patient" class="nav-link">
+                        <i class="fa-solid fa-user-plus"></i>&nbsp; Shto pacient
+                      </a>
+                    </li>
+                    <li>
+                      <a href="/view/patients" class="nav-link">
+                        <i class="fas fa-users"></i>&nbsp; Shiko pacientat
+                      </a>
+                    </li>
+                  </ul>
                 </div>
-            </li>
+              </li>
 
-            <li class="nav-item mb-3">
-                <a class="nav-link sidebar-link d-flex align-items-center" data-bs-toggle="collapse" href="#patientsMenu" role="button">
-                    <i class="fas fa-users"></i>&nbsp;
-                    <span class="flex-grow-1">Pacientat</span>
-                    <i class="fa-solid fa-chevron-down arrow ms-auto"></i>
-                </a>
-              <div class="collapse ps-3 menu" id="patientsMenu">
-                <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-                  <li><a href="/patients/add" class="nav-link">Shto pacientat</a></li>
-                  <li><a href="/patients/view" class="nav-link">Shiko pacientat</a></li>
-                </ul>
-              </div>
-            </li>
+              <li class="nav-item mb-3">
+                    <a class="nav-link sidebar-link d-flex align-items-center" data-bs-toggle="collapse" href="#refersMenu" role="button">
+                        <i class="fas fa-user-md"></i>&nbsp;
+                        <span class="flex-grow-1">Referuesit</span>
+                        <i class="fa-solid fa-chevron-down arrow ms-auto"></i>
+                    </a>
+                    <div class="collapse ps-3 menu" id="refersMenu">
+                      <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                        <li>
+                          <a href="/patients/add" class="nav-link">
+                            <i class="fa-solid fa-user-plus"></i>&nbsp; Shto referues
+                          </a>
+                        </li>
+                        <li>
+                          <a href="/patients/view" class="nav-link">
+                            <i class="fas fa-user-md"></i>&nbsp; Shiko referuesit
+                          </a>
+                        </li>
+                      </ul>
+                    </div>
+                </li>
 
-            <li class="nav-item mb-3">
-                <a class="nav-link sidebar-link d-flex align-items-center" data-bs-toggle="collapse" href="#settingsMenu" role="button">
-                    <i class="fa-solid fa-gear"></i>&nbsp;
-                    <span class="flex-grow-1">Cilesimet</span>
-                    <i class="fa-solid fa-chevron-down arrow ms-auto"></i>
-                </a>
-              <div class="collapse ps-3 menu" id="settingsMenu">
-                <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-                  <li><a href="/profile" class="nav-link">Profili</a></li>
-                  <li><a href="/change-password" class="nav-link">Ndrro fjalkalimin</a></li>
-                  <li><a href="/delete-account" class="nav-link">Fshij llogarin</a></li>
-                </ul>
-              </div>
-            </li>
+              <li class="nav-item mb-3">
+                  <a class="nav-link sidebar-link d-flex align-items-center" data-bs-toggle="collapse" href="#settingsMenu" role="button">
+                      <i class="fa-solid fa-gear"></i>&nbsp;
+                      <span class="flex-grow-1">Cilesimet</span>
+                      <i class="fa-solid fa-chevron-down arrow ms-auto"></i>
+                  </a>
+                  <div class="collapse ps-3 menu" id="settingsMenu">
+                    <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                      <li>
+                        <a href="/profile" class="nav-link">
+                          <i class="fa-solid fa-user"></i>&nbsp; Profili
+                        </a>
+                      </li>
+
+                      <li>
+                        <a href="/change-password" class="nav-link">
+                          <i class="fa-solid fa-lock"></i>&nbsp; Ndrro fjalkalimin
+                        </a>
+                      </li>
+                      
+                      <li>
+                        <a href="/delete-account" class="nav-link">
+                          <i class="fa-solid fa-trash"></i>&nbsp; Fshij llogarin
+                        </a>
+                      </li>
+                    </ul>
+                  </div>
+              </li>
           </ul>
         </div>
       </nav>
@@ -93,7 +137,8 @@
                 <th>Tel</th>
                 <th>Email</th>
                 <th>Data krijimit</th>
-                <th>Data përditësimit</th>
+                <th>I perditsuar</th>
+                <th>Veprimet</th>
               </tr>
             </thead>
             <tbody>
@@ -104,13 +149,37 @@
                   <td><%= doctor.department %></td>
                   <td><%= doctor.tel %></td>
                   <td><%= doctor.email %></td>
-                  <td><%= new Date(doctor.created_at).toLocaleDateString("sq-AL") %></td>
+                  <td><%= new Date(doctor.created_at).toLocaleDateString("en-US") %></td>
                   <td>
                     <% if (doctor.updated_at) { %>
-                      <%= new Date(doctor.updated_at).toLocaleString("sq-AL") %>
+                        <%= new Date(doctor.updated_at).toLocaleString("en-US", {
+                          day: "2-digit",
+                          month: "2-digit",
+                          year: "numeric",
+                          hour: "2-digit",
+                          minute: "2-digit",
+                          hour12: true
+                        }) %>
                     <% } else { %>
-                      <span class="text-muted fst-italic">Nuk eshte perditsuar</span>
+                      <span class="text-muted fst-italic">Jo</span>
                     <% } %>
+                  </td>
+                  <td>
+                    <!-- Butoni për editim -->
+                    <a href="#" class="btn btn-warning edit-doctor-btn" 
+                      data-id="<%= doctor.id %>" 
+                      data-name="<%= doctor.full_name %>" 
+                      data-department="<%= doctor.department %>" 
+                      data-tel="<%= doctor.tel %>" 
+                      data-email="<%= doctor.email %>">
+                      <i class="fa-solid fa-pen-to-square"></i>
+                    </a>
+                    <!-- Butoni për fshirje -->
+                    <a href="#" class="btn btn-danger delete-doctor-btn"
+                      data-id="<%= doctor.id %>" 
+                      data-name="<%= doctor.full_name %>">
+                      <i class="fa-solid fa-trash"></i>
+                    </a>
                   </td>
                 </tr>
               <% }) %>
@@ -121,6 +190,67 @@
     </main>
   </div>
 </div>
+
+<!-- Modal për Edit Doktor -->
+<div class="modal fade" id="editDoctorModal" tabindex="-1" aria-labelledby="editDoctorLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <form action="/edit/doctor" method="POST" class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="editDoctorLabel">Ndrysho të dhënat e doktorit</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Mbyll"></button>
+      </div>
+      <div class="modal-body">
+        <input type="hidden" name="id" id="edit-id">
+        <div class="mb-3">
+          <label for="edit-name" class="form-label">Emri i plotë</label>
+          <input type="text" class="form-control" name="fullName" id="edit-name" required>
+        </div>
+        <div class="mb-3">
+          <label for="edit-department" class="form-label">Departamenti</label>
+          <input type="text" class="form-control" name="department" id="edit-department" required>
+        </div>
+        <div class="mb-3">
+          <label for="edit-tel" class="form-label">Telefoni</label>
+          <input type="text" class="form-control" name="tel" id="edit-tel" required>
+        </div>
+        <div class="mb-3">
+          <label for="edit-email" class="form-label">Email</label>
+          <input type="email" class="form-control" name="email" id="edit-email" required>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="submit" class="btn btn-primary">Ruaj Ndryshimet</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+
+<!-- Modal për konfirmim fshirje -->
+<div class="modal fade" id="deleteDoctorModal" tabindex="-1" aria-labelledby="deleteDoctorLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <form action="/delete/doctor" method="POST" class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title text-danger" id="deleteDoctorLabel">
+          <i class="fa-solid fa-trash"></i>&nbsp; Konfirmo fshirjen
+        </h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Mbyll"></button>
+      </div>
+      <div class="modal-body">
+        <input type="hidden" name="id" id="delete-id">
+        <p>A jeni i sigurt që dëshironi të fshini doktorin <strong class="text-danger">
+          <span id="delete-name"></span>
+        </strong>?</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Anulo</button>
+        <button type="submit" class="btn btn-danger">Fshij</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+
 
 <!-- DataTables -->
 <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
@@ -140,7 +270,7 @@
   $(document).ready(function () {
     const table = $('#doctorsTable').DataTable({
       language: {
-        url: '//cdn.datatables.net/plug-ins/1.13.6/i18n/sq.json'
+        url: 'https://cdn.datatables.net/plug-ins/1.13.6/i18n/sq.json'
       },
       dom: 'Bfrtip',
       pageLength: 5,
@@ -167,6 +297,34 @@
     setTimeout(() => {
       $('.dt-button').removeClass('dt-button');
     }, 100);
+
+        // Shfaq modalin dhe mbush të dhënat kur klikohet edit
+    $('.edit-doctor-btn').on('click', function () {
+      const id = $(this).data('id');
+      const name = $(this).data('name');
+      const department = $(this).data('department');
+      const tel = $(this).data('tel');
+      const email = $(this).data('email');
+
+      $('#edit-id').val(id);
+      $('#edit-name').val(name);
+      $('#edit-department').val(department);
+      $('#edit-tel').val(tel);
+      $('#edit-email').val(email);
+
+      $('#editDoctorModal').modal('show');
+    });
+  });
+
+  // Kur klikohet butoni për fshirje
+  $('.delete-doctor-btn').on('click', function () {
+    const id = $(this).data('id');
+    const name = $(this).data('name');
+
+    $('#delete-id').val(id);
+    $('#delete-name').text(name);
+
+    $('#deleteDoctorModal').modal('show');
   });
 </script>
 

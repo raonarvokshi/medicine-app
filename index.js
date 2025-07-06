@@ -6,6 +6,7 @@ import { authenticateToken, verifyToken } from "./middlewares.js";
 import auth from "./routes/auth.js"
 import profile from "./routes/profile.js";
 import doctors from "./routes/doctors.js";
+import patient from "./routes/patients.js";
 
 dotenv.config();
 const app = express();
@@ -18,6 +19,7 @@ app.use(cookieParser());
 app.use(auth);
 app.use(profile);
 app.use(doctors);
+app.use(patient)
 
 app.get("/", verifyToken, (req, res) => {
     res.render("home.ejs", { user: req.user });
