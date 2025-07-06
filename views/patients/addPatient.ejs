@@ -18,7 +18,7 @@
       <form action="/add/doctor" method="POST" class="bg-white shadow-lg p-5 rounded-3 mt-4">
         <div class="row mt-3">
           <!-- Name -->
-          <div class="col-lg-6">
+          <div class="col-lg-4">
             <label for="fName" class="form-label">Emri</label>
             <div class="input-group mt-1">
               <span class="input-group-text"><i class="fas fa-user"></i></span>
@@ -27,7 +27,7 @@
           </div>
 
           <!-- Department -->
-          <div class="col-lg-6">
+          <div class="col-lg-4">
             <label for="parents-name" class="form-label">Emri i prindit</label>
             <div class="input-group mt-1">
               <span class="input-group-text"><i class="fas fa-user"></i></span>
@@ -36,7 +36,7 @@
           </div>
 
           <!-- Phone Number -->
-          <div class="col-lg-6 mt-3">
+          <div class="col-lg-4">
             <label for="last-name" class="form-label">Mbiemri</label>
             <div class="input-group mt-1">
               <span class="input-group-text"><i class="fas fa-user"></i></span>
@@ -45,7 +45,7 @@
           </div>
 
           <!-- Email -->
-          <div class="col-lg-6 mt-3">
+          <div class="col-lg-4 mt-3">
             <label for="email" class="form-label">Email</label>
             <div class="input-group mt-1">
               <span class="input-group-text"><i class="fas fa-envelope"></i></span>
@@ -54,7 +54,7 @@
           </div>
 
           <!-- GJINIA -->
-          <div class="col-lg-6 mt-3">
+          <div class="col-lg-4 mt-3">
                 <label for="email" class="form-label">Gjinia</label>
                 <div class="input-group">
                     <span class="input-group-text"><i class="fas fa-mars"></i></span>
@@ -66,15 +66,15 @@
                 </div>
             </div>
 
-            <div class="col-lg-6 mt-3">
-                <label for="email" class="form-label">Numri Personal</label>
+            <div class="col-lg-4 mt-3">
+                <label for="personal-num" class="form-label">Numri Personal</label>
                 <div class="input-group">
                     <span class="input-group-text"><i class="fas fa-id-card"></i></span>
-                    <input type="email" class="form-control" placeholder="Nr Personal..." id="email" name="personalNum">
+                    <input type="number" class="form-control" placeholder="Nr Personal..." id="personal-num" name="personalNum">
                 </div>
             </div>
 
-            <div class="col-lg-6 mt-3">
+            <div class="col-lg-4 mt-3">
                 <label for="birthday" class="form-label">Datelindja</label>
                 <div class="input-group">
                     <span class="input-group-text"><i class="fas fa-calendar-alt"></i></span>
@@ -82,17 +82,56 @@
                 </div>
             </div>
 
-            <div class="col-lg-6 mt-3">
+            <div class="col-lg-4 mt-3">
                 <label for="age-type" class="form-label">Lloji i moshes</label>
                 <div class="input-group">
                     <span class="input-group-text"><i class="fas fa-hourglass-half"></i></span>
-                    <select class="form-select">
+                    <select class="form-select" id="age-type" name="ageType">
                         <option selected>Zgjidh llojin e moshes</option>
                         <option value="years">Vjet</option>
                         <option value="months">Muaj</option>
                         <option value="weeks">Jave</option>
                         <option value="days">Dite</option>
                         <option value="hours">Or</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="col-lg-4 mt-3">
+                <label for="city" class="form-label">Qyteti</label>
+                <div class="input-group">
+                    <span class="input-group-text"><i class="fa-solid fa-building-user"></i></span>
+                    <input type="text" class="form-control" placeholder="Qyteti..." id="city" name="city">
+                </div>
+            </div>
+
+            <div class="col-lg-4 mt-3">
+                <label for="address" class="form-label">Adresa</label>
+                <div class="input-group">
+                    <span class="input-group-text"><i class="fa-solid fa-location-dot"></i></span>
+                    <input type="text" class="form-control" placeholder="Adresa..." id="address" name="address">
+                </div>
+            </div>
+
+            <div class="col-lg-4 mt-3">
+              <label for="comment" class="form-label">Koment</label>
+              <div class="input-group">
+                <span class="input-group-text">
+                  <i class="fas fa-comment-dots"></i>
+                </span>
+                <textarea class="form-control" id="comment" name="comment" rows="1" placeholder="Shkruaj një koment nese duhet..."></textarea>
+              </div>
+            </div>
+
+
+            <div class="col-lg-4 mt-3">
+                <label for="insurance" class="form-label">Sigurimi</label>
+                <div class="input-group">
+                    <span class="input-group-text"><i class="fas fa-shield-alt"></i></span>
+                    <select class="form-select" id="insurance" name="insurance">
+                        <option selected>Zgjidh Sigurimin</option>
+                        <option value="hasInsurance">Ka sigurim</option>
+                        <option value="noInsurance">Ska sigurim</option>
                     </select>
                 </div>
             </div>
