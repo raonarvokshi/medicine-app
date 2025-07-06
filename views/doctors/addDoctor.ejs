@@ -1,0 +1,58 @@
+<%- include("../partials/dashboard.ejs") %>
+<!-- Main Content -->
+    <main class="col-md-10 ml-sm-auto col-lg-10 pt-3 px-4 bg-light vh-100">
+        <div class="doctor-header d-flex align-items-center justify-content-between mt-3">
+            <h1 class="add-doctor__title">Add New Doctor</h1>
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="/">Home</a></li>
+                    <li class="breadcrumb-item"><a href="/dashboard">Dashboard</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Add Doctor</li>
+                </ol>
+            </nav>
+        </div>
+        <form action="#" method="POST" class="bg-white shadow-lg p-5 rounded-3 mt-4">
+                <div class="row mt-3">
+                    <!-- Name -->
+                    <div class="col-lg-6">
+                        <label for="name" class="form-label">Name</label>
+                        <div class="input-group mt-1">
+                            <span class="input-group-text"><i class="fas fa-user"></i></span>
+                            <input type="text" class="form-control" placeholder="Name..." id="name" name="name">
+                        </div>
+                    </div>
+
+                    <!-- Department -->
+                    <div class="col-lg-6">
+                        <label for="department" class="form-label">Department</label>
+                        <div class="input-group mt-1">
+                            <span class="input-group-text"><i class="fas fa-building"></i></span>
+                            <input type="text" class="form-control" placeholder="Department..." id="department" name="department">
+                        </div>
+                    </div>
+
+                    <!-- Phone Number -->
+                    <div class="col-lg-6 mt-3">
+                        <label for="phone-number" class="form-label">Phone number</label>
+                        <div class="input-group mt-1">
+                            <span class="input-group-text"><i class="fas fa-phone"></i></span>
+                            <input type="number" class="form-control" placeholder="Phone Number..." id="phone-number" name="phone">
+                        </div>
+                    </div>
+
+                    <!-- Email -->
+                    <div class="col-lg-6 mt-3">
+                        <label for="email" class="form-label">Email</label>
+                        <div class="input-group mt-1">
+                            <span class="input-group-text"><i class="fas fa-envelope"></i></span>
+                            <input type="email" class="form-control" placeholder="Email..." id="email" name="email">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Submit -->
+                <button type="submit" class="btn btn-lg mt-4 add-doc__btn">
+                    <i class="fas fa-plus-circle"></i> Add Doctor
+                </button>
+        </form>
+    </main>

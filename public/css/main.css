@@ -319,3 +319,13 @@ main {
     width: 15%;
     height: 1%;
 }
+
+.add-doc__btn {
+    background-color: var(--bg-primary);
+    color: #fff;
+}
+
+.add-doc__btn:hover {
+    background-color: var(--bg-hover);
+    color: #fff;
+}
