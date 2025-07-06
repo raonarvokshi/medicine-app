@@ -3,15 +3,15 @@
     <div class="container register-container shadow-lg p-5 rounded-5">
         <div class="row">
             <div class="col-lg-6">
-                <h1>Create new account</h1>
+                <h1>Krijo nje llogari te re</h1>
                 <p>
-                <span class="text-muted">Already have an account?</span> 
-                <a href="/login" class="register-link">Login</a>
+                <span class="text-muted">Veqse ke nje llogari?</span> 
+                <a href="/login" class="register-link">Identifikohu</a>
                 </p>
                 <form action="/register" method="POST" class="mt-5">
                     <div class="mb-3">
-                        <label for="username" class="form-label">Username</label>
-                        <input type="text" class="form-control" id="username" name="username" placeholder="Username..." required>
+                        <label for="username" class="form-label">Emri</label>
+                        <input type="text" class="form-control" id="username" name="username" placeholder="Emri..." required>
                     </div>
 
                     <div class="mb-3">
@@ -20,11 +20,11 @@
                     </div>
 
                     <div class="mb-3">
-                        <label for="password" class="form-label">Password</label>
-                        <input type="password" class="form-control" id="password" name="password" placeholder="Password..." required>
+                        <label for="password" class="form-label">Fjalkalimi</label>
+                        <input type="password" class="form-control" id="password" name="password" placeholder="Fjalkalimi..." required>
                     </div>
 
-                    <button type="submit" class="btn btn-lg w-100 mt-3 mb-3 text-light register-btn">Register</button>
+                    <button type="submit" class="btn btn-lg w-100 mt-3 mb-3 text-light register-btn">Regjistrohu</button>
 
                     <% if (locals.error) { %>
                         <div id="error-msg" class="text-danger">

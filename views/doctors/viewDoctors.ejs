@@ -1,0 +1,176 @@
+<%- include("../partials/header.ejs") %>
+<%- include("../partials/navbar.ejs") %>
+
+<div class="container-fluid">
+  <div class="row">
+    <!-- Sidebar -->
+      <nav id="sidebarMenu" class="col-lg-2 d-lg-block sidebar collapse">
+        <div class="position-sticky pt-3">
+          <ul class="nav flex-column">
+            <li class="nav-item text-center">
+              <a class="nav-link active dashboard-sidebar__link" href="/dashboard">
+                <i class="fa-solid fa-user"></i> <%= user.username %>
+              </a>
+            </li>
+            <hr>
+            
+            <li class="nav-item mb-3">
+                <a class="nav-link sidebar-link d-flex align-items-center" data-bs-toggle="collapse" href="#doctorsMenu" role="button">
+                    <i class="fas fa-user-md"></i>&nbsp;
+                    <span class="flex-grow-1">Doktorat</span>
+                    <i class="fa-solid fa-chevron-down arrow ms-auto"></i>
+                </a>
+                <div class="collapse menu" id="doctorsMenu">
+                    <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                        <li class="ps-3">
+                            <a href="/add/doctor" class="nav-link">
+                                <i class="fa-solid fa-user-plus"></i>&nbsp; Shto doktor
+                            </a>
+                        </li>
+
+                        <li class="ps-3">
+                            <a href="/view/doctors" class="nav-link">
+                                <i class="fas fa-user-md"></i>&nbsp; Shiko doktorat
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </li>
+
+            <li class="nav-item mb-3">
+                <a class="nav-link sidebar-link d-flex align-items-center" data-bs-toggle="collapse" href="#patientsMenu" role="button">
+                    <i class="fas fa-users"></i>&nbsp;
+                    <span class="flex-grow-1">Pacientat</span>
+                    <i class="fa-solid fa-chevron-down arrow ms-auto"></i>
+                </a>
+              <div class="collapse ps-3 menu" id="patientsMenu">
+                <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                  <li><a href="/patients/add" class="nav-link">Shto pacientat</a></li>
+                  <li><a href="/patients/view" class="nav-link">Shiko pacientat</a></li>
+                </ul>
+              </div>
+            </li>
+
+            <li class="nav-item mb-3">
+                <a class="nav-link sidebar-link d-flex align-items-center" data-bs-toggle="collapse" href="#settingsMenu" role="button">
+                    <i class="fa-solid fa-gear"></i>&nbsp;
+                    <span class="flex-grow-1">Cilesimet</span>
+                    <i class="fa-solid fa-chevron-down arrow ms-auto"></i>
+                </a>
+              <div class="collapse ps-3 menu" id="settingsMenu">
+                <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                  <li><a href="/profile" class="nav-link">Profili</a></li>
+                  <li><a href="/change-password" class="nav-link">Ndrro fjalkalimin</a></li>
+                  <li><a href="/delete-account" class="nav-link">Fshij llogarin</a></li>
+                </ul>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </nav>
+    <!-- Main Content -->
+    <main class="col-lg-10 offset-lg-2 pt-4 px-4 bg-light min-vh-100">
+      <div class="doctor-header d-flex align-items-center justify-content-between mt-3">
+        <h1 class="add-doctor__title">Shiko doktorat</h1>
+        <nav aria-label="breadcrumb">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/">Ballina</a></li>
+            <li class="breadcrumb-item"><a href="/dashboard">Paneli</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Shiko doktorat</li>
+          </ol>
+        </nav>
+      </div>
+
+      <!-- Tabela -->
+      <div class="card mt-4 shadow">
+        <div class="card-body">
+          <table id="doctorsTable" class="table table-bordered table-striped">
+            <thead class="table-light">
+              <tr>
+                <th>#</th>
+                <th>Emri</th>
+                <th>Departamenti</th>
+                <th>Tel</th>
+                <th>Email</th>
+                <th>Data krijimit</th>
+                <th>Data përditësimit</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% doctors.forEach((doctor, index) => { %>
+                <tr>
+                  <td><%= index + 1 %></td>
+                  <td><%= doctor.full_name %></td>
+                  <td><%= doctor.department %></td>
+                  <td><%= doctor.tel %></td>
+                  <td><%= doctor.email %></td>
+                  <td><%= new Date(doctor.created_at).toLocaleDateString("sq-AL") %></td>
+                  <td>
+                    <% if (doctor.updated_at) { %>
+                      <%= new Date(doctor.updated_at).toLocaleString("sq-AL") %>
+                    <% } else { %>
+                      <span class="text-muted fst-italic">Nuk eshte perditsuar</span>
+                    <% } %>
+                  </td>
+                </tr>
+              <% }) %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </main>
+  </div>
+</div>
+
+<!-- DataTables -->
+<link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+
+<!-- DataTables Buttons CSS & JS -->
+<link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.4.1/css/buttons.dataTables.min.css">
+<script src="https://cdn.datatables.net/buttons/2.4.1/js/dataTables.buttons.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/2.4.1/js/buttons.html5.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/2.4.1/js/buttons.print.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/pdfmake.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/vfs_fonts.js"></script>
+
+<script>
+  $(document).ready(function () {
+    const table = $('#doctorsTable').DataTable({
+      language: {
+        url: '//cdn.datatables.net/plug-ins/1.13.6/i18n/sq.json'
+      },
+      dom: 'Bfrtip',
+      pageLength: 5,
+      buttons: [
+        {
+          extend: 'excelHtml5',
+          text: '<i class="fas fa-file-excel"></i>',
+          className: 'btn btn-success me-2 mb-4'
+        },
+        {
+          extend: 'pdfHtml5',
+          text: '<i class="fas fa-file-pdf"></i>',
+          className: 'btn btn-danger me-2 mb-4'
+        },
+        {
+          extend: 'print',
+          text: '<i class="fas fa-print"></i>',
+          className: 'btn btn-secondary mb-4'
+        }
+      ]
+    });
+
+    // Hiq klasen dt-button dhe zëvendëso me klasat tona plotësisht
+    setTimeout(() => {
+      $('.dt-button').removeClass('dt-button');
+    }, 100);
+  });
+</script>
+
+
+
+
+<%- include("../partials/footer.ejs") %>

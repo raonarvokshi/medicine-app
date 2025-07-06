@@ -6,10 +6,10 @@
         <img src="/images/login.png" alt="" class="img-fluid pe-5">
       </div>
       <div class="col-lg-6">
-        <h1>Welcome back</h1>
+        <h1>Miresevjen perseri</h1>
         <p>
-          <span class="text-muted">Don't have an account?</span> 
-          <a href="/register" class="register-link text-decoration-none">Create one</a>
+          <span class="text-muted">Nuk ke nje llogari?</span> 
+          <a href="/register" class="register-link text-decoration-none">Krijoje nje</a>
         </p>
         <form action="/login" method="POST" class="mt-4">
             <div class="mb-4">
@@ -18,11 +18,11 @@
             </div>
             
             <div class="mb-4">
-              <label for="password" class="form-label">Password</label>
-              <input type="password" class="form-control" id="password" name="password" placeholder="Password..." required>
+              <label for="password" class="form-label">Fjalkalimi</label>
+              <input type="password" class="form-control" id="password" name="password" placeholder="Fjalkalimi..." required>
             </div>
             
-            <button type="submit" class="btn btn-lg w-100 text-light register-btn">Log in</button>
+            <button type="submit" class="btn btn-lg w-100 text-light register-btn">Identifikohu</button>
             <% if (locals.error) { %>
               <div id="error-msg" class="text-danger mt-3"><%= error %></div>
             <% } %>

@@ -4,6 +4,11 @@
     --bg-hover: #049edb;
 }
 
+body {
+    overflow-y: hidden;
+}
+
+
 .title {
     color: var(--primary-color);
 }
@@ -242,13 +247,6 @@
     background-color: #15b4f3;
 }
 
-/* Main content push */
-main {
-    margin-left: 16.6667%;
-    /* 2 nga 12 kolona për sidebar-in Bootstrap */
-}
-
-
 /* Active highlight link in sidebar */
 .nav-link.active {
     font-weight: bold;
@@ -328,4 +326,34 @@ main {
 .add-doc__btn:hover {
     background-color: var(--bg-hover);
     color: #fff;
+}
+
+.dataTables_wrapper .dataTables_paginate .paginate_button {
+    border: none !important;
+    border-radius: 5px !important;
+}
+
+.dataTables_wrapper .dataTables_paginate .paginate_button.current {
+    background-color: var(--bg-primary) !important;
+}
+
+.dataTables_wrapper .dataTables_paginate .paginate_button.current {
+    color: #fff !important;
+}
+
+
+.dataTables_wrapper .dataTables_paginate .paginate_button:hover {
+    background: var(--bg-hover) !important;
+    outline: none !important;
+    border: none !important;
+}
+
+.dataTables_wrapper .dataTables_paginate .paginate_button.disabled {
+    color: #6c757d !important;
+    background-color: #e9ecef !important;
+    pointer-events: none;
+}
+
+.dataTables_wrapper .dataTables_paginate {
+    margin-top: 1rem;
 }
