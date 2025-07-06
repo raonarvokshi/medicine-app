@@ -1,3 +1,21 @@
+:root {
+    --primary-color: #0281b3;
+    --bg-primary: #0281b3;
+    --bg-hover: #049edb;
+}
+
+.title {
+    color: var(--primary-color);
+}
+
+.dashboard-btn {
+    background-color: var(--bg-primary);
+}
+
+.dashboard-btn:hover {
+    background-color: var(--bg-hover);
+}
+
 .first-col {
     margin-top: 200px;
 }
@@ -38,7 +56,20 @@
 }
 
 .register-link {
-    color: #5bc0de;
+    color: var(--primary-color);
+    text-decoration: none;
+}
+
+.register-link:hover {
+    text-decoration: underline;
+}
+
+.register-btn {
+    background-color: var(--bg-primary);
+}
+
+.register-btn:hover {
+    background-color: var(--bg-hover);
 }
 
 .custom-hover-dropdown {
@@ -234,6 +265,10 @@ main {
 
 .dashboard-sidebar__link {
     font-size: 32px;
+}
+
+.dashboard-sidebar__link:hover {
+    color: #fff;
 }
 
 /* Collapse toggle icon rotation */
