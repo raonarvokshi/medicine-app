@@ -1,0 +1,305 @@
+<%- include("../partials/header.ejs") %>
+<%- include("../partials/navbar.ejs") %>
+
+<div class="container-fluid">
+  <div class="row">
+    <nav id="sidebarMenu" class="col-lg-2 d-lg-block sidebar collapse shadow">
+        <div class="position-sticky pt-3">
+          <ul class="nav flex-column">
+              <li class="nav-item text-center">
+                <a class="nav-link active dashboard-sidebar__link" href="/dashboard">
+                  <i class="fa-solid fa-user"></i> <%= user.username %>
+                </a>
+              </li>
+              <hr>
+              
+              <li class="nav-item mb-3">
+                  <a class="nav-link sidebar-link d-flex align-items-center" data-bs-toggle="collapse" href="#doctorsMenu" role="button">
+                      <i class="fas fa-user-md"></i>&nbsp;
+                      <span class="flex-grow-1">Doktorat</span>
+                      <i class="fa-solid fa-chevron-down arrow ms-auto"></i>
+                  </a>
+                  <div class="collapse menu" id="doctorsMenu">
+                      <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                          <li class="ps-3">
+                              <a href="/add/doctor" class="nav-link">
+                                  <i class="fa-solid fa-user-plus"></i>&nbsp; Shto doktor
+                              </a>
+                          </li>
+
+                          <li class="ps-3">
+                              <a href="/view/doctors" class="nav-link">
+                                  <i class="fas fa-user-md"></i>&nbsp; Shiko doktorat
+                              </a>
+                          </li>
+                      </ul>
+                  </div>
+              </li>
+
+              <li class="nav-item mb-3">
+                  <a class="nav-link sidebar-link d-flex align-items-center" data-bs-toggle="collapse" href="#patientsMenu" role="button">
+                      <i class="fas fa-users"></i>&nbsp;
+                      <span class="flex-grow-1">Pacientat</span>
+                      <i class="fa-solid fa-chevron-down arrow ms-auto"></i>
+                  </a>
+                <div class="collapse ps-3 menu" id="patientsMenu">
+                  <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                    <li>
+                      <a href="/add/patient" class="nav-link">
+                        <i class="fa-solid fa-user-plus"></i>&nbsp; Shto pacient
+                      </a>
+                    </li>
+                    <li>
+                      <a href="/view/patients" class="nav-link">
+                        <i class="fas fa-users"></i>&nbsp; Shiko pacientat
+                      </a>
+                    </li>
+                  </ul>
+                </div>
+              </li>
+
+              <li class="nav-item mb-3">
+                    <a class="nav-link sidebar-link d-flex align-items-center" data-bs-toggle="collapse" href="#refersMenu" role="button">
+                        <i class="fas fa-user-md"></i>&nbsp;
+                        <span class="flex-grow-1">Referuesit</span>
+                        <i class="fa-solid fa-chevron-down arrow ms-auto"></i>
+                    </a>
+                    <div class="collapse ps-3 menu" id="refersMenu">
+                      <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                        <li>
+                          <a href="/patients/add" class="nav-link">
+                            <i class="fa-solid fa-user-plus"></i>&nbsp; Shto referues
+                          </a>
+                        </li>
+                        <li>
+                          <a href="/patients/view" class="nav-link">
+                            <i class="fas fa-user-md"></i>&nbsp; Shiko referuesit
+                          </a>
+                        </li>
+                      </ul>
+                    </div>
+                </li>
+
+              <li class="nav-item mb-3">
+                  <a class="nav-link sidebar-link d-flex align-items-center" data-bs-toggle="collapse" href="#settingsMenu" role="button">
+                      <i class="fa-solid fa-gear"></i>&nbsp;
+                      <span class="flex-grow-1">Cilesimet</span>
+                      <i class="fa-solid fa-chevron-down arrow ms-auto"></i>
+                  </a>
+                  <div class="collapse ps-3 menu" id="settingsMenu">
+                    <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                      <li>
+                        <a href="/profile" class="nav-link">
+                          <i class="fa-solid fa-user"></i>&nbsp; Profili
+                        </a>
+                      </li>
+
+                      <li>
+                        <a href="/profile/change-password" class="nav-link">
+                          <i class="fa-solid fa-lock"></i>&nbsp; Ndrro fjalkalimin
+                        </a>
+                      </li>
+                      
+                      <li>
+                        <a href="/profile/delete-account" class="nav-link">
+                          <i class="fa-solid fa-trash"></i>&nbsp; Fshij llogarin
+                        </a>
+                      </li>
+                      <li>
+                        <a href="/logout" class="nav-link">
+                            <i class="fa-solid fa-arrow-right-from-bracket"></i> Dil
+                        </a>
+                      </li>
+                    </ul>
+                  </div>
+              </li>
+          </ul>
+        </div>
+      </nav>
+
+    <main class="col-lg-10 offset-lg-2 pt-4 px-4 bg-light min-vh-100">
+      <div class="doctor-header d-flex align-items-center justify-content-between mt-3">
+        <h1 class="add-doctor__title">Shiko pacientat</h1>
+        <nav aria-label="breadcrumb">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/">Ballina</a></li>
+            <li class="breadcrumb-item"><a href="/dashboard">Paneli</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Shiko pacientat</li>
+          </ol>
+        </nav>
+      </div>
+
+      <div class="card mt-4 shadow">
+        <div class="card-body">
+          <table id="patientsTable" class="table table-bordered table-striped">
+            <thead class="table-light">
+              <tr>
+                <th>#</th>
+                <th>Emri</th>
+                <th>Emri i prindit</th>
+                <th>Mbiemri</th>
+                <th>Email</th>
+                <th>Komenti</th>
+                <th>Sigurimi</th>
+                <th>Veprimet</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% patients.forEach((patient, index) => { %>
+                <tr>
+                  <td><%= index + 1 %></td>
+                  <td><%= patient.first_name %></td>
+                  <td><%= patient.parent_name %></td>
+                  <td><%= patient.last_name %></td>
+                  <td><%= patient.email %></td>
+                  <td>
+                    <% if (patient.comment) { %>
+                      <%= patient.comment %>
+                    <% } else { %>
+                      <span class="text-muted fst-italic">S'ka koment</span>
+                    <% } %>
+                  </td>
+                  <td><%= patient.insurance_status === 'hasInsurance' ? 'Ka sigurim' : 'Ska sigurim' %></td>
+                  <td>
+                    <a href="#" class="btn btn-info text-light view-patient-btn" 
+                      data-id="<%= patient.id %>"
+                      data-first="<%= patient.first_name %>"
+                      data-parent="<%= patient.parent_name %>"
+                      data-last="<%= patient.last_name %>"
+                      data-gender="<%= patient.gender %>"
+                      data-email="<%= patient.email %>"
+                      data-birthday="<%= patient.birthday %>"
+                      data-age-type="<%= patient.age_type %>"
+                      data-comment="<%= patient.comment %>"
+                      data-insurance="<%= patient.insurance_status %>"
+                      data-city="<%= patient.city %>"
+                      data-address="<%= patient.address %>"
+                      data-personalnum="<%= patient.personal_number %>"
+                      data-updated="<%= patient.updated_at %>">
+                      <i class="fa-solid fa-circle-info"></i>
+                    </a>
+                    <a href="#" class="btn btn-warning text-white edit-patient-btn"
+                      data-id="<%= patient.id %>"
+                      data-first="<%= patient.first_name %>"
+                      data-parent="<%= patient.parent_name %>"
+                      data-last="<%= patient.last_name %>"
+                      data-gender="<%= patient.gender %>"
+                      data-email="<%= patient.email %>"
+                      data-birthday="<%= patient.birthday %>"
+                      data-age-type="<%= patient.age_type %>"
+                      data-comment="<%= patient.comment %>"
+                      data-insurance="<%= patient.insurance_status %>"
+                      data-city="<%= patient.city %>"
+                      data-address="<%= patient.address %>"
+                      data-personalnum="<%= patient.personal_number %>">
+                      <i class="fa-solid fa-pen-to-square"></i>
+                    </a>
+                    <a href="#" class="btn btn-danger delete-patient-btn"
+                      data-id="<%= patient.id %>"
+                      data-first="<%= patient.first_name %>"
+                      data-parent="<%= patient.parent_name %>"
+                      data-last="<%= patient.last_name %>">
+                      <i class="fa-solid fa-trash"></i>
+                    </a>
+                  </td>
+                </tr>
+              <% }) %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </main>
+  </div>
+</div>
+<%- include("../partials/patientModals.ejs") %>
+
+<!-- DataTables CSS -->
+<link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
+
+<!-- jQuery & DataTables JS -->
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+
+<script>
+  $(document).ready(function () {
+    $('#patientsTable').DataTable({
+      language: {
+        url: 'https://cdn.datatables.net/plug-ins/1.13.6/i18n/sq.json'
+      }
+    });
+
+    $('.view-patient-btn').click(function () {
+      const data = $(this).data();
+      $('#modal-first').text(data.first);
+      $('#modal-parent').text(data.parent);
+      $('#modal-last').text(data.last);
+      $('#modal-gender').text(data.gender === 'm' ? 'Mashkull' : 'Femër');
+      $('#modal-email').text(data.email);
+      $('#modal-birthday').text(new Date(data.birthday).toLocaleDateString('en-GB'));
+      $('#modal-age-type').text(translateAgeType(data.ageType));
+      $('#modal-personalnum').text(data.personalnum);
+      $('#modal-city').text(data.city);
+      $('#modal-address').text(data.address);
+      $('#modal-insurance').text(data.insurance === 'hasInsurance' ? 'Ka sigurim' : 'S\'ka sigurim');
+      $('#modal-comment').text(data.comment || 'S\'ka koment');
+      if (data.updated) {
+        const updatedDate = new Date(data.updated);
+        const date = updatedDate.toLocaleDateString('en-GB');
+        const time = updatedDate.toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' });
+        $('#modal-updated').text(`${date} ${time}`);
+      } else {
+        $('#modal-updated').text('Nuk është përditësuar ndonjëherë');
+      }
+
+      $('#viewPatientModal').modal('show');
+    });
+
+  $('.edit-patient-btn').click(function () {
+    const data = $(this).data();
+    $('#edit-id').val(data.id);
+    $('#fName').val(data.first);
+    $('#parentsName').val(data.parent);
+    $('#lName').val(data.last);
+    $('#gender').val(data.gender);
+    $('#email').val(data.email);
+
+    const birthday = new Date(data.birthday);
+    const day = String(birthday.getDate()).padStart(2, '0');
+    const month = String(birthday.getMonth() + 1).padStart(2, '0'); // muajt fillojnë nga 0
+    const year = birthday.getFullYear();
+    const formattedBirthday = `${year}-${month}-${day}`; // yyyy-mm-dd për input[type=date]
+    $('#birthday').val(formattedBirthday);
+
+
+
+    $('#ageType').val(data.ageType);
+    $('#personalNum').val(data.personalnum);
+    $('#city').val(data.city);
+    $('#address').val(data.address);
+    $('#comment').val(data.comment);
+    $('#insurance').val(data.insurance);
+    $('#editPatientModal').modal('show');
+  });
+
+
+    $('.delete-patient-btn').click(function () {
+      const data = $(this).data();
+      $('#delete-id').val(data.id);
+      $('#delete-fullname').text(`${data.first} ${data.parent} ${data.last}`);
+      $('#deletePatientModal').modal('show');
+    });
+
+    function translateAgeType(type) {
+      switch(type) {
+        case 'years': return 'Vjet';
+        case 'months': return 'Muaj';
+        case 'weeks': return 'Javë';
+        case 'days': return 'Ditë';
+        case 'hours': return 'Orë';
+        default: return type;
+      }
+    }
+  });
+</script>
+
+<%- include("../partials/footer.ejs") %>

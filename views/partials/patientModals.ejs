@@ -1,22 +1,41 @@
-<%- include("../partials/dashboard.ejs") %>
+<!-- Modal Info -->
+<div class="modal fade" id="viewPatientModal" tabindex="-1" aria-labelledby="viewPatientLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="viewPatientLabel">Detajet e pacientit</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Mbyll"></button>
+        </div>
 
-<div class="container-fluid">
-  <div class="row">
-    <!-- Main Content -->
-    <main class="col-lg-10 offset-lg-2 pt-4 px-4 bg-light min-vh-100">
-      <div class="doctor-header d-flex align-items-center justify-content-between mt-3">
-        <h1 class="add-doctor__title">Shto pacient te ri</h1>
-        <nav aria-label="breadcrumb">
-          <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="/">Ballina</a></li>
-            <li class="breadcrumb-item"><a href="/dashboard">Paneli</a></li>
-            <li class="breadcrumb-item active" aria-current="page">Shto pacient</li>
-          </ol>
-        </nav>
+        <div class="modal-body">
+        <p><strong>Emri:</strong> <span id="modal-first"></span></p>
+        <p><strong>Emri i prindit:</strong> <span id="modal-parent"></span></p>
+        <p><strong>Mbiemri:</strong> <span id="modal-last"></span></p>
+        <p><strong>Gjinia:</strong> <span id="modal-gender"></span></p>
+        <p><strong>Email:</strong> <span id="modal-email"></span></p>
+        <p><strong>Datëlindja:</strong> <span id="modal-birthday"></span></p>
+        <p><strong>Lloji i moshës:</strong> <span id="modal-age-type"></span></p>
+        <p><strong>Numri Personal:</strong> <span id="modal-personalnum"></span></p>
+        <p><strong>Qyteti:</strong> <span id="modal-city"></span></p>
+        <p><strong>Adresa:</strong> <span id="modal-address"></span></p>
+        <p><strong>Sigurimi:</strong> <span id="modal-insurance"></span></p>
+        <p><strong>Komenti:</strong> <span id="modal-comment"></span></p>
+        <p><strong>Eshte perditsuar:</strong> <span id="modal-updated"></span></p>
+        </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal për Editim Pacienti -->
+<div class="modal fade" id="editPatientModal" tabindex="-1" aria-labelledby="editPatientLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl">
+    <form action="/edit/patient" method="POST" class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="editPatientLabel">Ndrysho të dhënat e pacientit</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Mbyll"></button>
       </div>
-
-      <!-- RREGULLUAR: action dhe emrat e inputeve -->
-      <form action="/add/patient" method="POST" class="bg-white shadow-lg p-5 rounded-3 mt-4">
+      <div class="modal-body">
+        <input type="hidden" name="id" id="edit-id">
         <div class="row mt-3">
           <!-- Emri -->
           <div class="col-lg-4">
@@ -141,40 +160,32 @@
             </div>
           </div>
         </div>
-
-        <!-- Submit -->
-        <button type="submit" class="btn btn-lg mt-4 add-doc__btn">
-          <i class="fas fa-plus-circle"></i> Shto pacient
-        </button>
-
-        <% if (locals.success) { %>
-          <p class="text-success mt-3" id="success-msg"><%= success %></p>
-        <% } %>
-
-        <% if (locals.error) { %>
-          <p class="text-danger mt-3" id="error-msg"><%= error %></p>
-        <% } %>
-      </form>
-    </main>
+      </div>
+      <div class="modal-footer">
+        <button type="submit" class="btn btn-primary">Ruaj Ndryshimet</button>
+      </div>
+    </form>
   </div>
 </div>
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-<script>
-  $(document).ready(function () {
-    const errorMsg = $("#error-msg");
-    const successMsg = $("#success-msg");
-
-    if (errorMsg.length) {
-      setTimeout(() => {
-        errorMsg.fadeOut("slow");
-      }, 5000);
-    }
-
-    if (successMsg.length) {
-      setTimeout(() => {
-        successMsg.fadeOut("slow");
-      }, 5000);
-    }
-  });
-</script>
+<!-- Modal për Fshirje Pacienti -->
+<div class="modal fade" id="deletePatientModal" tabindex="-1" aria-labelledby="deletePatientLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <form action="/delete/patient" method="POST" class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title text-danger" id="deletePatientLabel">
+          <i class="fa-solid fa-trash"></i> Konfirmo fshirjen
+        </h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Mbyll"></button>
+      </div>
+      <div class="modal-body">
+        <input type="hidden" name="id" id="delete-id">
+        <p>A jeni i sigurt që dëshironi të fshini pacientin <strong class="text-danger" id="delete-fullname"></strong>?</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Anulo</button>
+        <button type="submit" class="btn btn-danger">Fshij</button>
+      </div>
+    </form>
+  </div>
+</div>

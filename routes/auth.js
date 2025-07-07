@@ -31,12 +31,12 @@ router.post("/login", async (req, res) => {
                     const token = jwt.sign(
                         { id: user.id, email: user.email, username: user.username },
                         JWT_SECRET,
-                        { expiresIn: "1h" }
+                        { expiresIn: "2h" }
                     );
 
                     res.cookie("token", token, {
                         httpOnly: true,
-                        maxAge: 3600000
+                        maxAge: 2 * 60 * 60 * 1000
                     });
 
                     res.redirect("/");
@@ -88,7 +88,7 @@ router.post("/register", async (req, res) => {
 
                 res.cookie("token", token, {
                     httpOnly: true,
-                    maxAge: 3600000
+                    maxAge: 2 * 60 * 60 * 1000
                 });
 
                 res.redirect("/");
