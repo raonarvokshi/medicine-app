@@ -653,3 +653,13 @@ body.dark-mode .select2-results__option--highlighted {
     /* kur bëhet hover ose selected */
     color: #fff !important;
 }
+
+body.dark-mode #modal-hours-list {
+    background-color: #2b2b2b;
+}
+
+body.dark-mode #modal-hours-list .list-group-item {
+    background-color: #2b2b2b;
+    color: #fff;
+    border-color: #444;
+}
