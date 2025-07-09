@@ -29,6 +29,7 @@ router.get("/view/doctors", authenticateToken, async (req, res) => {
             patientsPage: false,
             locationPage: false,
             appointmentsPage: false,
+            doctorsSchedulePage: false,
             refPage: false
         });
     } catch (err) {

@@ -10,6 +10,7 @@ import ref from "./routes/referrers.js";
 import dashboard from "./routes/dashboard.js";
 import location from "./routes/location.js";
 import appointments from "./routes/appointments.js";
+import docSche from "./routes/docSchedule.js";
 
 dotenv.config();
 const app = express();
@@ -27,6 +28,7 @@ app.use(ref);
 app.use(dashboard);
 app.use(location);
 app.use(appointments);
+app.use(docSche);
 
 app.get("/", (req, res) => {
     const token = req.cookies.token;

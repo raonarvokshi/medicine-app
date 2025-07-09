@@ -16,7 +16,8 @@ router.get('/view/refs', authenticateToken, async (req, res) => {
             doctorsPage: false,
             locationPage: false,
             patientsPage: false,
-            appointmentsPage: false
+            appointmentsPage: false,
+            doctorsSchedulePage: false
         });
     } catch (err) {
         console.error('Gabim duke marrë referuesit:', err);

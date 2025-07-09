@@ -16,6 +16,7 @@ router.get("/view/location", authenticateToken, async (req, res) => {
             refPage: false,
             locationPage: true,
             appointmentsPage: false,
+            doctorsSchedulePage: false,
             activeMenu: "shenimet"
         });
     } catch (err) {

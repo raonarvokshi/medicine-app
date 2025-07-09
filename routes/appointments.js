@@ -34,6 +34,7 @@ router.get("/view/appointments", authenticateToken, async (req, res) => {
             patientsPage: false,
             refPage: false,
             locationPage: false,
+            doctorsSchedulePage: false,
             activeMenu: "shenimet",
             appointments: appointmentsResult.rows,
             doctors: doctorsResult.rows,

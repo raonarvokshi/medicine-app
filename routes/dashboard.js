@@ -25,6 +25,7 @@ router.get("/dashboard", authenticateToken, async (req, res) => {
             refPage: false,
             locationPage: false,
             appointmentsPage: false,
+            doctorsSchedulePage: false,
             activeMenu: null
         });
     } catch (err) {
