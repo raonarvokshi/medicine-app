@@ -8,7 +8,6 @@ router.get("/view/location", authenticateToken, async (req, res) => {
 
     try {
         const result = await db.query("SELECT * FROM location ORDER BY id DESC");
-        console.log(result.rows);
         res.render("location/location.ejs", {
             user: req.user,
             locations: result.rows,
