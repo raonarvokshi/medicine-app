@@ -2,11 +2,14 @@ import express from "express"
 import bodyParser from "body-parser"
 import dotenv from "dotenv";
 import cookieParser from "cookie-parser";
-import { authenticateToken, verifyToken } from "./middlewares.js";
 import auth from "./routes/auth.js"
 import profile from "./routes/profile.js";
 import doctors from "./routes/doctors.js";
 import patient from "./routes/patients.js";
+import ref from "./routes/referrers.js";
+import dashboard from "./routes/dashboard.js";
+import location from "./routes/location.js";
+import appointments from "./routes/appointments.js";
 
 dotenv.config();
 const app = express();
@@ -19,14 +22,20 @@ app.use(cookieParser());
 app.use(auth);
 app.use(profile);
 app.use(doctors);
-app.use(patient)
+app.use(patient);
+app.use(ref);
+app.use(dashboard);
+app.use(location);
+app.use(appointments);
 
-app.get("/", verifyToken, (req, res) => {
-    res.render("home.ejs", { user: req.user });
-});
+app.get("/", (req, res) => {
+    const token = req.cookies.token;
 
-app.get("/dashboard", authenticateToken, (req, res) => {
-    res.render("dashboard.ejs", { user: req.user });
+    if (!token) {
+        return res.redirect("/login");
+    } else {
+        return res.redirect("/dashboard");
+    }
 });
 
 app.listen(PORT, () => {

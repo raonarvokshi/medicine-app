@@ -39,7 +39,7 @@ router.post("/login", async (req, res) => {
                         maxAge: 2 * 60 * 60 * 1000
                     });
 
-                    res.redirect("/");
+                    res.redirect("/dashboard");
                 } else {
                     res.render("authentication/login.ejs", { error: "Password Incorrect" });
                 }
@@ -91,7 +91,7 @@ router.post("/register", async (req, res) => {
                     maxAge: 2 * 60 * 60 * 1000
                 });
 
-                res.redirect("/");
+                res.redirect("/dashboard");
             });
         }
     } catch (err) {

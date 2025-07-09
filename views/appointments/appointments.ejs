@@ -1,0 +1,379 @@
+<%- include("../partials/header.ejs") %>
+<%- include("../partials/navbar.ejs") %>
+
+<div class="container-fluid">
+  <div class="row">
+    <%- include("../partials/sidebar.ejs") %>
+
+    <main class="col-lg-10 offset-lg-2 pt-4 px-4 min-vh-100">
+      <div class="d-flex justify-content-between mt-4">
+        <button class="btn btn-lg mb-3 add-doc__btn" data-bs-toggle="modal" data-bs-target="#addAppointmentModal">
+          <i class="fas fa-plus-circle"></i> Shto termin
+        </button>
+        <h1 class="dash-page__title">Shiko Terminet</h1>
+      </div>
+
+      <div class="card shadow">
+        <div class="card-body">
+          <table id="appointmentsTable" class="table table-bordered table-striped">
+            <thead class="table-light">
+              <tr>
+                <th>#</th>
+                <th>Pacienti</th>
+                <th>Doktori</th>
+                <th>Data</th>
+                <th>Ora</th>
+                <th>Statusi</th>
+                <th>Veprimet</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% appointments.forEach((a, index) => { %>
+                <tr>
+                  <td><%= index + 1 %></td>
+                  <td><%= a.patient_name %></td>
+                  <td><%= a.doctor_name %></td>
+                  <td><%= new Date(a.date).toLocaleDateString() %></td>
+                  <td><%= a.time %></td>
+                  <td><%= a.status %></td>
+                  <td>
+                    <a href="#" class="btn btn-warning edit-appointment-btn"
+                      data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Përditëso termin"
+                      data-id="<%= a.id %>"
+                      data-patient="<%= a.patient_id %>"
+                      data-doctor="<%= a.doctor_id %>"
+                      data-date="<%= a.date.toISOString().split('T')[0] %>"
+                      data-time="<%= a.time %>"
+                      data-status="<%= a.status %>">
+                      <i class="fa-solid fa-pen-to-square"></i>
+                    </a>
+                    <a href="#" class="btn btn-danger delete-appointment-btn"
+                      data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Fshij doktorin"
+                      data-id="<%= a.id %>"
+                      data-name="<%= a.patient_name %>">
+                      <i class="fa-solid fa-trash"></i>
+                    </a>
+                  </td>
+                </tr>
+              <% }) %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </main>
+  </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="addAppointmentModal" tabindex="-1" aria-labelledby="addAppointmentModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <form action="/add/appointment" method="POST" class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Shto Terminin</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="mb-3">
+          <label class="form-label">Doktori</label>
+          <select class="form-select" id="doctorSelect" name="doctor_id" required>
+            <option value="">Zgjedh doktorin</option>
+            <% doctors.forEach(d => { %>
+              <option value="<%= d.id %>"><%= d.full_name %></option>
+            <% }) %>
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label">Pacienti</label>
+          <select class="form-select" id="patientSelect" name="patient_id" required>
+            <option value="">Zgjedh pacientin</option>
+            <% patients.forEach(p => { %>
+              <option value="<%= p.id %>"><%= p.first_name %> <%= p.last_name %></option>
+            <% }) %>
+          </select>
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Data</label>
+          <input type="text" class="form-control" id="datepicker" name="date" required>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label">Ora</label>
+          <input type="text" class="form-control js-time-picker" name="time" required>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label">Statusi</label>
+          <select class="form-select" name="status" required>
+            <option value="I caktuar">I caktuar</option>
+            <option value="I anuluar">I anuluar</option>
+            <option value="I kryer">I kryer</option>
+          </select>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="submit" class="btn btn-primary">Ruaj</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+
+<!-- Modal për Editim Termini -->
+<div class="modal fade" id="editAppointmentModal" tabindex="-1" aria-labelledby="editAppointmentLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <form action="/edit/appointment" method="POST" class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Ndrysho Terminin</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Mbyll"></button>
+      </div>
+      <div class="modal-body">
+        <input type="hidden" name="id" id="edit-id">
+
+        <div class="mb-3">
+          <label class="form-label">Doktori</label>
+          <select class="form-select" id="edit-doctor" name="doctor_id" required>
+            <% doctors.forEach(d => { %>
+              <option value="<%= d.id %>"><%= d.full_name %></option>
+            <% }) %>
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label">Pacienti</label>
+          <select class="form-select" id="edit-patient" name="patient_id" required>
+            <% patients.forEach(p => { %>
+              <option value="<%= p.id %>"><%= p.first_name %> <%= p.last_name %></option>
+            <% }) %>
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label">Data</label>
+          <input type="date" class="form-control" name="date" id="edit-date" required>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label">Ora</label>
+          <input type="time" class="form-control" name="time" id="edit-time" required>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label">Statusi</label>
+          <select class="form-select" name="status" id="edit-status" required>
+            <option value="I caktuar">I caktuar</option>
+            <option value="I anuluar">I anuluar</option>
+            <option value="I kryer">I kryer</option>
+          </select>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="submit" class="btn btn-primary">Ruaj Ndryshimet</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+
+<!-- Modal për Fshirje Termini -->
+<div class="modal fade" id="deleteAppointmentModal" tabindex="-1" aria-labelledby="deleteAppointmentLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <form action="/delete/appointment" method="POST" class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title text-danger" id="deleteAppointmentLabel">
+          <i class="fa-solid fa-trash"></i>&nbsp; Konfirmo fshirjen
+        </h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Mbyll"></button>
+      </div>
+      <div class="modal-body">
+        <input type="hidden" name="id" id="delete-id">
+        <p>A jeni i sigurt që dëshironi të fshini këtë termin?</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Anulo</button>
+        <button type="submit" class="btn btn-danger">Fshij</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+
+<!-- DataTables -->
+<link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+
+<!-- Select2 CSS -->
+<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+
+<!-- Select2 JS -->
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
+<!-- datepicker jqueryUI -->
+<link rel="stylesheet" href="https://code.jquery.com/ui/1.14.1/themes/base/jquery-ui.css">
+<link rel="stylesheet" href="/resources/demos/style.css">
+<script src="https://code.jquery.com/ui/1.14.1/jquery-ui.js"></script>
+
+<!-- Timepicker CSS -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.css">
+<!-- Timepicker JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.js"></script>
+
+<link  href="/css/picker.css" rel="stylesheet">
+<script src="/js/picker.js"></script>
+
+  <script>
+  $(function() {
+    $( "#datepicker" ).datepicker({
+      changeMonth: true,
+      changeYear: true,
+      showAnim: "slideDown"
+    });
+  });
+
+  new Picker(document.querySelector('.js-time-picker'), {
+    format: 'HH:mm',
+    headers: true,
+    text: {
+      title: 'Pick a time',
+    },
+  });
+
+  </script>
+
+<script>
+  $(document).ready(function () {
+    $('#appointmentsTable').DataTable({
+      responsive: true,
+      language: {
+        url: 'https://cdn.datatables.net/plug-ins/1.13.6/i18n/sq.json'
+      },
+      dom: 'Bfrtip',
+      pageLength: 5,
+      buttons: [
+        {
+          extend: 'excelHtml5',
+          text: '<i class="fas fa-file-excel"></i>',
+          className: 'btn btn-success me-2 mb-4'
+        },
+        {
+          extend: 'pdfHtml5',
+          text: '<i class="fas fa-file-pdf"></i>',
+          className: 'btn btn-danger me-2 mb-4'
+        },
+        {
+          extend: 'print',
+          text: '<i class="fas fa-print"></i>',
+          className: 'btn btn-secondary mb-4'
+        }
+      ]
+    });
+
+    // Inicializo Select2
+    $('#doctorSelect').select2({
+      dropdownParent: $('#addAppointmentModal'), // Shfaqet korrekt brenda modalit
+      placeholder: "Zgjedh doktorin",
+      width: '100%'
+    });
+
+    $('#patientSelect').select2({
+      dropdownParent: $('#addAppointmentModal'),
+      placeholder: "Zgjedh pacientin",
+      width: '100%'
+    });
+
+    // Inicializo Select2 për modalin e editimit
+    $('#edit-doctor').select2({
+      dropdownParent: $('#editAppointmentModal'),
+      placeholder: "Zgjedh doktorin",
+      width: '100%'
+    });
+
+    $('#edit-patient').select2({
+      dropdownParent: $('#editAppointmentModal'),
+      placeholder: "Zgjedh pacientin",
+      width: '100%'
+    });
+
+
+      // Edit Termin
+    $('.edit-appointment-btn').on('click', function () {
+      const id = $(this).data('id');
+      const doctorId = $(this).data('doctor');
+      const patientId = $(this).data('patient');
+      const date = $(this).data('date');
+      const time = $(this).data('time');
+      const status = $(this).data('status');
+
+      $('#edit-id').val(id);
+      $('#edit-doctor').val(doctorId).trigger('change');
+      $('#edit-patient').val(patientId).trigger('change');
+      $('#edit-date').val(date);
+      $('#edit-time').val(time);
+      $('#edit-status').val(status);
+
+      $('#editAppointmentModal').modal('show');
+    });
+
+  // Delete Termin
+  $('.delete-appointment-btn').on('click', function () {
+      const id = $(this).data('id');
+
+      $('#delete-id').val(id);
+      $('#deleteAppointmentModal').modal('show');
+    });
+  });
+
+  document.addEventListener('DOMContentLoaded', function () {
+    const urlParams = new URLSearchParams(window.location.search);
+    const added = urlParams.get("added");
+    const updated = urlParams.get("updated");
+    const deleted = urlParams.get("deleted");
+
+    if (added === "true") {
+      Swal.fire({
+        icon: 'success',
+        title: 'Sukses!',
+        text: 'Termini u caktua me sukses.',
+        confirmButtonColor: '#3085d6',
+        confirmButtonText: 'OK',
+        timer: 1500,
+        timerProgressBar: true,
+      }).then(() => {
+        const newUrl = window.location.origin + window.location.pathname;
+        window.history.replaceState({}, document.title, newUrl);
+      });
+    } else if (updated === "true") {
+      Swal.fire({
+        icon: 'success',
+        title: 'Sukses!',
+        text: 'Termini u perditsua me sukses.',
+        confirmButtonColor: '#3085d6',
+        confirmButtonText: 'OK',
+        timer: 1500,
+        timerProgressBar: true,
+      }).then(() => {
+        // Hiqe query param nga URL pas mbylljes
+        const newUrl = window.location.origin + window.location.pathname;
+        window.history.replaceState({}, document.title, newUrl);
+      });
+    } else if (deleted === "true") {
+      Swal.fire({
+        icon: 'success',
+        title: 'Sukses!',
+        text: 'Termini u fshi me sukses.',
+        confirmButtonColor: '#3085d6',
+        confirmButtonText: 'OK',
+        timer: 1500,
+        timerProgressBar: true,
+      }).then(() => {
+        // Hiqe query param nga URL pas mbylljes
+        const newUrl = window.location.origin + window.location.pathname;
+        window.history.replaceState({}, document.title, newUrl);
+      });
+    }
+  });
+</script>
+
+
+<%- include("../partials/footer.ejs") %>

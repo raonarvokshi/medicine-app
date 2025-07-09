@@ -4,10 +4,6 @@ import { authenticateToken } from "../middlewares.js";
 
 const router = express.Router();
 
-router.get("/add/patient", authenticateToken, (req, res) => {
-    res.render("patients/addPatient.ejs", { user: req.user });
-});
-
 router.post("/add/patient", authenticateToken, async (req, res) => {
     const {
         fName,
@@ -45,10 +41,10 @@ router.post("/add/patient", authenticateToken, async (req, res) => {
             ]
         );
 
-        res.render("patients/addPatient.ejs", { user: req.user, success: "Pacienti u shtua me sukses", error: null });
+        res.redirect("/view/patients?added=true");
     } catch (err) {
         console.error("Error inserting patient:", err.message);
-        res.render("patients/addPatient.ejs", { user: req.user, error: "Gabim gjatë shtimit të pacientit" });
+        res.redirect("/view/patients");
     }
 });
 
@@ -58,6 +54,12 @@ router.get("/view/patients", authenticateToken, async (req, res) => {
         res.render("patients/viewPatients.ejs", {
             user: req.user,
             patients: result.rows,
+            activeMenu: "shenimet",
+            patientsPage: true,
+            doctorsPage: false,
+            locationPage: false,
+            appointmentsPage: false,
+            refPage: false
         });
     } catch (err) {
         console.error(err);
@@ -117,7 +119,7 @@ router.post("/edit/patient", authenticateToken, async (req, res) => {
             ]
         );
 
-        res.redirect("/view/patients");
+        res.redirect("/view/patients?updated=true");
     } catch (err) {
         console.error("Gabim gjatë përditësimit të pacientit:", err);
         res.status(500).send("Gabim gjatë përditësimit të pacientit");
@@ -130,7 +132,7 @@ router.post("/delete/patient", authenticateToken, async (req, res) => {
     const { id } = req.body;
     try {
         await db.query("DELETE FROM patients WHERE id = $1", [id]);
-        res.redirect("/view/patients");
+        res.redirect("/view/patients?deleted=true");
     } catch (err) {
         console.error(err);
         res.status(500).send("Gabim gjatë fshirjes së pacientit");

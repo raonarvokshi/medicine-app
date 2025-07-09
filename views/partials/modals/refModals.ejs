@@ -1,0 +1,119 @@
+<!-- Modal Shto -->
+<div class="modal fade" id="addReferrerModal" tabindex="-1" aria-labelledby="addReferrerModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <form action="/add/ref" method="POST" id="add-ref__form">
+        <div class="modal-header">
+          <h5 class="modal-title" id="addReferrerModalLabel">Shto referues</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="row mt-3">
+            <!-- Name -->
+            <div class="col-lg-6">
+              <label for="name" class="form-label">Emri i plote</label>
+              <div class="input-group mt-1">
+                <span class="input-group-text"><i class="fas fa-user"></i></span>
+                <input type="text" class="form-control" placeholder="Emri i plote..." id="name" name="fullName">
+              </div>
+            </div>
+
+            <!-- Department -->
+            <div class="col-lg-6">
+              <label for="department" class="form-label">Departamenti</label>
+              <div class="input-group mt-1">
+                <span class="input-group-text"><i class="fas fa-building"></i></span>
+                <input type="text" class="form-control" placeholder="Departamenti..." id="department" name="department">
+              </div>
+            </div>
+
+            <!-- Phone Number -->
+            <div class="col-lg-6 mt-3">
+              <label for="phone-number" class="form-label">Numri i telefonit</label>
+              <div class="input-group mt-1">
+                <span class="input-group-text"><i class="fas fa-phone"></i></span>
+                <input type="number" class="form-control" placeholder="Numri i telefonit..." id="phone-number" name="phoneNumber">
+              </div>
+            </div>
+
+            <!-- Email -->
+            <div class="col-lg-6 mt-3">
+              <label for="email" class="form-label">Email</label>
+              <div class="input-group mt-1">
+                <span class="input-group-text"><i class="fas fa-envelope"></i></span>
+                <input type="email" class="form-control" placeholder="Email..." id="email" name="email">
+              </div>
+            </div>
+
+            <p class="text-danger mt-3 error-msg"></p>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Anulo</button>
+          <button type="submit" class="btn btn-primary">Ruaj</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+
+<!-- Modal për Edit Doktor -->
+<div class="modal fade" id="editRefModal" tabindex="-1" aria-labelledby="editRefLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <form action="/edit/ref" method="POST" class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="editRefLabel">Ndrysho të dhënat e referuesit</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Mbyll"></button>
+      </div>
+      <div class="modal-body">
+        <input type="hidden" name="id" id="edit-id">
+        <div class="mb-3">
+          <label for="edit-name" class="form-label">Emri i plotë</label>
+          <input type="text" class="form-control" name="fullName" id="edit-name" required>
+        </div>
+        <div class="mb-3">
+          <label for="edit-department" class="form-label">Departamenti</label>
+          <input type="text" class="form-control" name="department" id="edit-department" required>
+        </div>
+        <div class="mb-3">
+          <label for="edit-tel" class="form-label">Telefoni</label>
+          <input type="text" class="form-control" name="tel" id="edit-tel" required>
+        </div>
+        <div class="mb-3">
+          <label for="edit-email" class="form-label">Email</label>
+          <input type="email" class="form-control" name="email" id="edit-email" required>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="submit" class="btn btn-primary">Ruaj Ndryshimet</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+
+
+<!-- Modal për konfirmim fshirje -->
+<div class="modal fade" id="deleteRefModal" tabindex="-1" aria-labelledby="deleteRefLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <form action="/delete/ref" method="POST" class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title text-danger" id="deleteRefLabel">
+          <i class="fa-solid fa-trash"></i>&nbsp; Konfirmo fshirjen
+        </h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Mbyll"></button>
+      </div>
+      <div class="modal-body">
+        <input type="hidden" name="id" id="delete-id">
+        <p>A jeni i sigurt që dëshironi të fshini referuesin <strong class="text-danger">
+          <span id="delete-name"></span>
+        </strong>?</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Anulo</button>
+        <button type="submit" class="btn btn-danger">Fshij</button>
+      </div>
+    </form>
+  </div>
+</div>

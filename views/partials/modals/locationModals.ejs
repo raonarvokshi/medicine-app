@@ -1,0 +1,75 @@
+<!-- Modal Shto -->
+<div class="modal fade" id="addReferrerModal" tabindex="-1" aria-labelledby="addReferrerModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <form action="/add/location" method="POST" id="add-location__form">
+        <div class="modal-header">
+          <h5 class="modal-title" id="addReferrerModalLabel">Shto njesin organizative</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <label for="name" class="form-label">Emri</label>
+            <div class="input-group mt-1">
+              <span class="input-group-text"><i class="fa-solid fa-location-dot"></i></span>
+              <input type="text" class="form-control" placeholder="Emri..." id="name" name="name">
+            </div>
+
+            <p class="text-danger mt-3 error-msg"></p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Anulo</button>
+          <button type="submit" class="btn btn-primary">Ruaj</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+
+<!-- Modal për Edit Doktor -->
+<div class="modal fade" id="editLocationModal" tabindex="-1" aria-labelledby="editLocationLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <form action="/edit/location" method="POST" class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="editLocationLabel">Ndrysho të dhënat e njesis organizative</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Mbyll"></button>
+      </div>
+      <div class="modal-body">
+        <input type="hidden" name="id" id="edit-id">
+        <div class="mb-3">
+          <label for="edit-name" class="form-label">Emri</label>
+          <input type="text" class="form-control" name="name" id="edit-name" required>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="submit" class="btn btn-primary">Ruaj Ndryshimet</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+
+
+<!-- Modal për konfirmim fshirje -->
+<div class="modal fade" id="deleteLocationModal" tabindex="-1" aria-labelledby="deleteLocationLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <form action="/delete/location" method="POST" class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title text-danger" id="deleteLocationLabel">
+          <i class="fa-solid fa-trash"></i>&nbsp; Konfirmo fshirjen
+        </h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Mbyll"></button>
+      </div>
+      <div class="modal-body">
+        <input type="hidden" name="id" id="delete-id">
+        <p>A jeni i sigurt që dëshironi të fshini njesin organizative <strong class="text-danger">
+          <span id="delete-name"></span>
+        </strong>?</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Anulo</button>
+        <button type="submit" class="btn btn-danger">Fshij</button>
+      </div>
+    </form>
+  </div>
+</div>

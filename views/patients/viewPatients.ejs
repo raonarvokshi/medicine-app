@@ -3,165 +3,46 @@
 
 <div class="container-fluid">
   <div class="row">
-    <nav id="sidebarMenu" class="col-lg-2 d-lg-block sidebar collapse shadow">
-        <div class="position-sticky pt-3">
-          <ul class="nav flex-column">
-              <li class="nav-item text-center">
-                <a class="nav-link active dashboard-sidebar__link" href="/dashboard">
-                  <i class="fa-solid fa-user"></i> <%= user.username %>
-                </a>
-              </li>
-              <hr>
-              
-              <li class="nav-item mb-3">
-                  <a class="nav-link sidebar-link d-flex align-items-center" data-bs-toggle="collapse" href="#doctorsMenu" role="button">
-                      <i class="fas fa-user-md"></i>&nbsp;
-                      <span class="flex-grow-1">Doktorat</span>
-                      <i class="fa-solid fa-chevron-down arrow ms-auto"></i>
-                  </a>
-                  <div class="collapse menu" id="doctorsMenu">
-                      <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-                          <li class="ps-3">
-                              <a href="/add/doctor" class="nav-link">
-                                  <i class="fa-solid fa-user-plus"></i>&nbsp; Shto doktor
-                              </a>
-                          </li>
+    <%- include("../partials/sidebar.ejs") %>
 
-                          <li class="ps-3">
-                              <a href="/view/doctors" class="nav-link">
-                                  <i class="fas fa-user-md"></i>&nbsp; Shiko doktorat
-                              </a>
-                          </li>
-                      </ul>
-                  </div>
-              </li>
-
-              <li class="nav-item mb-3">
-                  <a class="nav-link sidebar-link d-flex align-items-center" data-bs-toggle="collapse" href="#patientsMenu" role="button">
-                      <i class="fas fa-users"></i>&nbsp;
-                      <span class="flex-grow-1">Pacientat</span>
-                      <i class="fa-solid fa-chevron-down arrow ms-auto"></i>
-                  </a>
-                <div class="collapse ps-3 menu" id="patientsMenu">
-                  <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-                    <li>
-                      <a href="/add/patient" class="nav-link">
-                        <i class="fa-solid fa-user-plus"></i>&nbsp; Shto pacient
-                      </a>
-                    </li>
-                    <li>
-                      <a href="/view/patients" class="nav-link">
-                        <i class="fas fa-users"></i>&nbsp; Shiko pacientat
-                      </a>
-                    </li>
-                  </ul>
-                </div>
-              </li>
-
-              <li class="nav-item mb-3">
-                    <a class="nav-link sidebar-link d-flex align-items-center" data-bs-toggle="collapse" href="#refersMenu" role="button">
-                        <i class="fas fa-user-md"></i>&nbsp;
-                        <span class="flex-grow-1">Referuesit</span>
-                        <i class="fa-solid fa-chevron-down arrow ms-auto"></i>
-                    </a>
-                    <div class="collapse ps-3 menu" id="refersMenu">
-                      <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-                        <li>
-                          <a href="/patients/add" class="nav-link">
-                            <i class="fa-solid fa-user-plus"></i>&nbsp; Shto referues
-                          </a>
-                        </li>
-                        <li>
-                          <a href="/patients/view" class="nav-link">
-                            <i class="fas fa-user-md"></i>&nbsp; Shiko referuesit
-                          </a>
-                        </li>
-                      </ul>
-                    </div>
-                </li>
-
-              <li class="nav-item mb-3">
-                  <a class="nav-link sidebar-link d-flex align-items-center" data-bs-toggle="collapse" href="#settingsMenu" role="button">
-                      <i class="fa-solid fa-gear"></i>&nbsp;
-                      <span class="flex-grow-1">Cilesimet</span>
-                      <i class="fa-solid fa-chevron-down arrow ms-auto"></i>
-                  </a>
-                  <div class="collapse ps-3 menu" id="settingsMenu">
-                    <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-                      <li>
-                        <a href="/profile" class="nav-link">
-                          <i class="fa-solid fa-user"></i>&nbsp; Profili
-                        </a>
-                      </li>
-
-                      <li>
-                        <a href="/profile/change-password" class="nav-link">
-                          <i class="fa-solid fa-lock"></i>&nbsp; Ndrro fjalkalimin
-                        </a>
-                      </li>
-                      
-                      <li>
-                        <a href="/profile/delete-account" class="nav-link">
-                          <i class="fa-solid fa-trash"></i>&nbsp; Fshij llogarin
-                        </a>
-                      </li>
-                      <li>
-                        <a href="/logout" class="nav-link">
-                            <i class="fa-solid fa-arrow-right-from-bracket"></i> Dil
-                        </a>
-                      </li>
-                    </ul>
-                  </div>
-              </li>
-          </ul>
-        </div>
-      </nav>
-
-    <main class="col-lg-10 offset-lg-2 pt-4 px-4 bg-light min-vh-100">
-      <div class="doctor-header d-flex align-items-center justify-content-between mt-3">
-        <h1 class="add-doctor__title">Shiko pacientat</h1>
-        <nav aria-label="breadcrumb">
-          <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="/">Ballina</a></li>
-            <li class="breadcrumb-item"><a href="/dashboard">Paneli</a></li>
-            <li class="breadcrumb-item active" aria-current="page">Shiko pacientat</li>
-          </ol>
-        </nav>
+    <main class="col-lg-10 offset-lg-2 pt-4 px-4 min-vh-100">
+      <div class="d-flex justify-content-between mt-4">
+        <button class="btn btn-lg add-doc__btn mb-3" data-bs-toggle="modal" data-bs-target="#addPatientModal">
+          <i class="fas fa-plus-circle"></i> Shto pacient
+        </button>
+          <div class="doctor-header ms-5">
+            <h1 class="dash-page__title">Shiko pacientat</h1>
+          </div>
+        <div class=""></div>
+        <div class=""></div>
       </div>
 
-      <div class="card mt-4 shadow">
+      <div class="card shadow">
         <div class="card-body">
           <table id="patientsTable" class="table table-bordered table-striped">
-            <thead class="table-light">
+            <thead>
               <tr>
-                <th>#</th>
+                <th style="width: 1%;">#</th>
                 <th>Emri</th>
                 <th>Emri i prindit</th>
                 <th>Mbiemri</th>
-                <th>Email</th>
                 <th>Komenti</th>
-                <th>Sigurimi</th>
+                <th style="width: 1%;">Sigurimi</th>
                 <th>Veprimet</th>
               </tr>
             </thead>
             <tbody>
               <% patients.forEach((patient, index) => { %>
                 <tr>
-                  <td><%= index + 1 %></td>
+                  <td style="width: 1%;"><%= index + 1 %></td>
                   <td><%= patient.first_name %></td>
                   <td><%= patient.parent_name %></td>
                   <td><%= patient.last_name %></td>
-                  <td><%= patient.email %></td>
-                  <td>
-                    <% if (patient.comment) { %>
-                      <%= patient.comment %>
-                    <% } else { %>
-                      <span class="text-muted fst-italic">S'ka koment</span>
-                    <% } %>
-                  </td>
+                  <td><%= patient.comment || "S'ka koment" %></td>
                   <td><%= patient.insurance_status === 'hasInsurance' ? 'Ka sigurim' : 'Ska sigurim' %></td>
                   <td>
-                    <a href="#" class="btn btn-info text-light view-patient-btn" 
+                    <a href="#" class="btn btn-info text-light view-patient-btn"
+                      data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Detajet e pacientit"
                       data-id="<%= patient.id %>"
                       data-first="<%= patient.first_name %>"
                       data-parent="<%= patient.parent_name %>"
@@ -178,7 +59,9 @@
                       data-updated="<%= patient.updated_at %>">
                       <i class="fa-solid fa-circle-info"></i>
                     </a>
+
                     <a href="#" class="btn btn-warning text-white edit-patient-btn"
+                      data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Perditso pacientin"
                       data-id="<%= patient.id %>"
                       data-first="<%= patient.first_name %>"
                       data-parent="<%= patient.parent_name %>"
@@ -194,7 +77,9 @@
                       data-personalnum="<%= patient.personal_number %>">
                       <i class="fa-solid fa-pen-to-square"></i>
                     </a>
+                    
                     <a href="#" class="btn btn-danger delete-patient-btn"
+                      data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Fshij pacientin"
                       data-id="<%= patient.id %>"
                       data-first="<%= patient.first_name %>"
                       data-parent="<%= patient.parent_name %>"
@@ -205,28 +90,73 @@
                 </tr>
               <% }) %>
             </tbody>
+            <tfoot>
+              <tr>
+                <th><input type="text" placeholder="#" class="form-control form-control-sm" /></th>
+                <th><input type="text" placeholder="Emri" class="form-control form-control-sm" /></th>
+                <th><input type="text" placeholder="Emri i prindit" class="form-control form-control-sm" /></th>
+                <th><input type="text" placeholder="Mbiemri" class="form-control form-control-sm" /></th>
+                <th><input type="text" placeholder="Komenti" class="form-control form-control-sm" /></th>
+                <th><input type="text" placeholder="Sigurimi" class="form-control form-control-sm" /></th>
+                <th></th>
+              </tr>
+            </tfoot>
           </table>
         </div>
       </div>
     </main>
   </div>
 </div>
-<%- include("../partials/patientModals.ejs") %>
 
-<!-- DataTables CSS -->
+<%- include("../partials/modals/patientModals.ejs") %>
+
+<!-- DataTables and Plugins -->
 <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
-
-<!-- jQuery & DataTables JS -->
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/2.4.1/js/dataTables.buttons.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/2.4.1/js/buttons.html5.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/2.4.1/js/buttons.print.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/pdfmake.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/vfs_fonts.js"></script>
 
 <script>
-  $(document).ready(function () {
-    $('#patientsTable').DataTable({
-      language: {
-        url: 'https://cdn.datatables.net/plug-ins/1.13.6/i18n/sq.json'
-      }
+$(document).ready(function () {
+    $('#patientsTable tfoot input').on('keyup change', function () {
+      const table = $('#patientsTable').DataTable();
+      const colIndex = $(this).parent().index();
+      table.column(colIndex).search(this.value).draw();
     });
+  const table = $('#patientsTable').DataTable({
+    language: {
+      url: 'https://cdn.datatables.net/plug-ins/1.13.6/i18n/sq.json'
+    },
+    dom: 'Bfrtip',
+    pageLength: 5,
+    buttons: [
+      {
+        extend: 'excelHtml5',
+        text: '<i class="fas fa-file-excel"></i>',
+        className: 'btn btn-success me-2 mb-4'
+      },
+      {
+        extend: 'pdfHtml5',
+        text: '<i class="fas fa-file-pdf"></i>',
+        className: 'btn btn-danger me-2 mb-4'
+      },
+      {
+        extend: 'print',
+        text: '<i class="fas fa-print"></i>',
+        className: 'btn btn-secondary mb-4'
+      }
+    ],
+  });
+
+    // Hiq klasen dt-button dhe zëvendëso me klasat tona plotësisht
+    setTimeout(() => {
+      $('.dt-button').removeClass('dt-button');
+    }, 100);
 
     $('.view-patient-btn').click(function () {
       const data = $(this).data();
@@ -301,5 +231,61 @@
     }
   });
 </script>
+
+
+<script>
+  $(document).ready(function () {
+    const urlParams = new URLSearchParams(window.location.search);
+    const added = urlParams.get("added");
+    const updated = urlParams.get("updated");
+    const deleted = urlParams.get("deleted");
+
+    if (added === "true") {
+      Swal.fire({
+        icon: 'success',
+        title: 'Sukses!',
+        text: 'Pacienti u shtua me sukses.',
+        confirmButtonColor: '#3085d6',
+        confirmButtonText: 'OK',
+        timer: 1500,
+        timerProgressBar: true,
+      }).then(() => {
+        // Pas klikimit OK, hiqe query param nga URL
+        const newUrl = window.location.origin + window.location.pathname;
+        window.history.replaceState({}, document.title, newUrl);
+      });
+    } else if (updated === "true") {
+      Swal.fire({
+        icon: 'success',
+        title: 'Sukses!',
+        text: 'Pacienti u perditsua me sukses.',
+        confirmButtonColor: '#3085d6',
+        confirmButtonText: 'OK',
+        timer: 1500,
+        timerProgressBar: true,
+      }).then(() => {
+        // Hiqe query param nga URL pas mbylljes
+        const newUrl = window.location.origin + window.location.pathname;
+        window.history.replaceState({}, document.title, newUrl);
+      });
+    } else if (deleted === "true") {
+      Swal.fire({
+        icon: 'success',
+        title: 'Sukses!',
+        text: 'Pacienti u fshi me sukses.',
+        confirmButtonColor: '#3085d6',
+        confirmButtonText: 'OK',
+        timer: 1500,
+        timerProgressBar: true,
+      }).then(() => {
+        // Hiqe query param nga URL pas mbylljes
+        const newUrl = window.location.origin + window.location.pathname;
+        window.history.replaceState({}, document.title, newUrl);
+      });
+    }
+  });
+</script>
+
+
 
 <%- include("../partials/footer.ejs") %>
