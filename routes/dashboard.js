@@ -9,17 +9,20 @@ router.get("/dashboard", authenticateToken, async (req, res) => {
     try {
         const patientResult = await db.query("SELECT COUNT(*) FROM patients");
         const doctorResult = await db.query("SELECT COUNT(*) FROM doctors");
-        const refResult = await db.query("SELECT COUNT(*) FROM referrers");
+        const todayResult = await db.query(
+            "SELECT COUNT(*) FROM appointments WHERE appointment_date = CURRENT_DATE"
+        );
+
 
         const patientCount = patientResult.rows[0].count;
         const doctorCount = doctorResult.rows[0].count;
-        const refCount = refResult.rows[0].count;
+        const todayAppointments = todayResult.rows[0].count;
 
         res.render("dashboard.ejs", {
             user: req.user,
             patientCount,
             doctorCount,
-            refCount,
+            todayAppointments,
             doctorsPage: false,
             patientsPage: false,
             refPage: false,

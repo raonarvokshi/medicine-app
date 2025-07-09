@@ -184,3 +184,77 @@ $('.delete-doctor-btn').on('click', function () {
 
     $('#deleteDoctorModal').modal('show');
 });
+
+
+
+
+// DOC SCHEDULE
+// Shfaq Oraret - Modal Info
+$('.view-hours-btn').on('click', function () {
+    const doctorName = $(this).data('doctor');
+    const hours = $(this).data('hours');
+    const orderedDays = [
+        "E Hënë", "E Martë", "E Mërkurë", "E Enjte",
+        "E Premte", "E Shtunë", "E Diel"
+    ];
+
+    $('#modal-doctor-name').text(doctorName);
+    const $list = $('#modal-hours-list');
+    $list.empty();
+
+    orderedDays.forEach(day => {
+        const dayData = hours[day];
+        let content = "";
+
+        if (dayData && dayData.start && dayData.end) {
+            content = `${dayData.start} - ${dayData.end}`;
+        } else {
+            content = `<span class="not-working__text">Nuk gjendet në pune</span>`;
+        }
+
+        const li = `
+        <li class="list-group-item d-flex justify-content-between">
+          <span><strong>${day}</strong></span>
+          <span>${content}</span>
+        </li>`;
+        $list.append(li);
+    });
+
+    $('#viewHoursModal').modal('show');
+});
+
+// Edit Orari
+$('.edit-schedule-btn').on('click', function () {
+    const id = $(this).data('id');
+    const doctorId = $(this).data('doctor');
+    const locationId = $(this).data('location');
+    const visitDuration = $(this).data('visit-duration');
+    const hours = $(this).data('weekday-hours');
+
+    $('#edit-id').val(id);
+    $('#edit-doctor').val(doctorId).trigger('change');
+    $('#edit-location').val(locationId).trigger('change');
+    $('#edit-visit-duration').val(visitDuration);
+
+    // vendos oraret ne input fields sipas ditëve
+    const days = ["E Hënë", "E Martë", "E Mërkurë", "E Enjte", "E Premte", "E Shtunë", "E Diel"];
+    days.forEach(day => {
+        if (hours[day]) {
+            $(`input.edit-time-start[data-day="${day}"]`).val(hours[day].start);
+            $(`input.edit-time-end[data-day="${day}"]`).val(hours[day].end);
+        } else {
+            $(`input.edit-time-start[data-day="${day}"]`).val('');
+            $(`input.edit-time-end[data-day="${day}"]`).val('');
+        }
+    });
+
+    $('#editScheduleModal').modal('show');
+});
+
+
+// Delete Orari
+$('.delete-schedule-btn').on('click', function () {
+    const id = $(this).data('id');
+    $('#delete-id').val(id);
+    $('#deleteScheduleModal').modal('show');
+});

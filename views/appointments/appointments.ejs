@@ -36,7 +36,7 @@
                   <td><%= a.patient_name %></td>
                   <td><%= a.doctor_name %></td>
                   <td><%= new Date(a.date).toLocaleDateString() %></td>
-                  <td><%= a.time %></td>
+                  <td><%= a.time?.substring(0, 5) %></td>
                   <td><%= a.status %></td>
                   <td>
                     <a href="#" class="btn btn-warning edit-appointment-btn"

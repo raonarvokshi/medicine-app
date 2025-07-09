@@ -8,11 +8,12 @@ const router = express.Router();
 router.get('/view/doctor-schedules', authenticateToken, async (req, res) => {
     try {
         const schedules = await db.query(`
-      SELECT ds.*, d.full_name AS doctor_name, l.name AS location_name
-      FROM doctor_schedules ds
-      JOIN doctors d ON ds.doctor_id = d.id
-      JOIN location l ON ds.location_id = l.id
-    `);
+            SELECT ds.*, d.full_name AS doctor_name, l.name AS location_name
+            FROM doctor_schedules ds
+            JOIN doctors d ON ds.doctor_id = d.id
+            JOIN location l ON ds.location_id = l.id
+            ORDER BY ds.id DESC
+        `);
 
         const doctors = await db.query('SELECT id, full_name FROM doctors');
         const locations = await db.query('SELECT id, name FROM location');
@@ -48,7 +49,7 @@ router.post('/add/doctor-schedule', authenticateToken, async (req, res) => {
       VALUES ($1, $2, $3, $4)
     `, [doctor_id, location_id, weekday_hours, visit_duration]);
 
-        res.redirect('/view/doctor-schedules');
+        res.redirect('/view/doctor-schedules?docSchedAdded=true');
     } catch (err) {
         console.error(err);
         res.status(500).send('Gabim gjatë shtimit të orarit');
@@ -69,7 +70,7 @@ router.post('/edit/doctor-schedule', authenticateToken, async (req, res) => {
       WHERE id = $5
     `, [doctor_id, location_id, weekday_hours, visit_duration, id]);
 
-        res.redirect('/view/doctor-schedules');
+        res.redirect('/view/doctor-schedules?docSchedUpdated=true');
     } catch (err) {
         console.error(err);
         res.status(500).send('Gabim gjatë përditësimit të orarit');
@@ -82,7 +83,7 @@ router.post('/delete/doctor-schedule', authenticateToken, async (req, res) => {
 
     try {
         await db.query(`DELETE FROM doctor_schedules WHERE id = $1`, [id]);
-        res.redirect('/view/doctor-schedules');
+        res.redirect('/view/doctor-schedules?docSchedDeleted=true');
     } catch (err) {
         console.error(err);
         res.status(500).send('Gabim gjatë fshirjes së orarit');

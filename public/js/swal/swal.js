@@ -250,4 +250,55 @@ document.addEventListener('DOMContentLoaded', function () {
             window.history.replaceState({}, document.title, newUrl);
         });
     }
+
+
+
+    // DOKTORAT
+    const docSchedParams = new URLSearchParams(window.location.search);
+    const docSchedAdded = docSchedParams.get("docSchedAdded");
+    const docSchedUpdated = docSchedParams.get("docSchedUpdated");
+    const docSchedDeleted = docSchedParams.get("docSchedDeleted");
+
+    if (docSchedAdded === "true") {
+        Swal.fire({
+            icon: 'success',
+            title: 'Sukses!',
+            text: 'Orari i doktorit u shtua me sukses.',
+            confirmButtonColor: '#3085d6',
+            confirmButtonText: 'OK',
+            timer: 1500,
+            timerProgressBar: true,
+        }).then(() => {
+            const newUrl = window.location.origin + window.location.pathname;
+            window.history.replaceState({}, document.title, newUrl);
+        });
+    } else if (docSchedUpdated === "true") {
+        Swal.fire({
+            icon: 'success',
+            title: 'Sukses!',
+            text: 'Orari i doktorit u perditsua me sukses.',
+            confirmButtonColor: '#3085d6',
+            confirmButtonText: 'OK',
+            timer: 1500,
+            timerProgressBar: true,
+        }).then(() => {
+            // Hiqe query param nga URL pas mbylljes
+            const newUrl = window.location.origin + window.location.pathname;
+            window.history.replaceState({}, document.title, newUrl);
+        });
+    } else if (docSchedDeleted === "true") {
+        Swal.fire({
+            icon: 'success',
+            title: 'Sukses!',
+            text: 'Orari i doktorit u fshi me sukses.',
+            confirmButtonColor: '#3085d6',
+            confirmButtonText: 'OK',
+            timer: 1500,
+            timerProgressBar: true,
+        }).then(() => {
+            // Hiqe query param nga URL pas mbylljes
+            const newUrl = window.location.origin + window.location.pathname;
+            window.history.replaceState({}, document.title, newUrl);
+        });
+    }
 });

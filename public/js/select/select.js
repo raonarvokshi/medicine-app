@@ -23,3 +23,31 @@ $('#edit-patient').select2({
     placeholder: "Zgjedh pacientin",
     width: '100%'
 });
+
+
+
+// Inicializo Select2
+$('#doctor-select').select2({
+    dropdownParent: $('#addScheduleModal'), // ose emri i modalit ku ndodhet select-i
+    placeholder: "Zgjedh doktorin",
+    width: '100%'
+});
+
+$('#location-select').select2({
+    dropdownParent: $('#addScheduleModal'),
+    placeholder: "Zgjedh njesin organizative",
+    width: '100%',
+});
+
+// Inicializo Select2 për modalin e editimit
+$('#edit-doctor').select2({
+    dropdownParent: $('#editScheduleModal'),
+    placeholder: "Zgjedh doktorin",
+    width: '100%'
+});
+
+$('#edit-location').select2({
+    dropdownParent: $('#editScheduleModal'),
+    placeholder: "Zgjedh pacientin",
+    width: '100%',
+});

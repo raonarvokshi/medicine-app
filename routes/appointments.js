@@ -21,7 +21,7 @@ router.get("/view/appointments", authenticateToken, async (req, res) => {
             FROM appointments a
             JOIN patients p ON a.patient_id = p.id
             JOIN doctors d ON a.doctor_id = d.id
-            ORDER BY a.appointment_date DESC, a.appointment_time DESC
+            ORDER BY a.id DESC
     `);
 
         const doctorsResult = await db.query("SELECT id, full_name FROM doctors ORDER BY full_name");
