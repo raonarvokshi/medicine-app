@@ -232,117 +232,13 @@
 
 <link  href="/css/picker.css" rel="stylesheet">
 <script src="/js/picker.js"></script>
+
+<!-- MY SCRIPTS -->
 <script src="/js/tables/tables.js"></script>
-
 <script src="/js/pickers/pickers.js"></script>
-
-<script>
-  $(document).ready(function () {
-    // Inicializo Select2
-    $('#doctorSelect').select2({
-      dropdownParent: $('#addAppointmentModal'), // Shfaqet korrekt brenda modalit
-      placeholder: "Zgjedh doktorin",
-      width: '100%'
-    });
-
-    $('#patientSelect').select2({
-      dropdownParent: $('#addAppointmentModal'),
-      placeholder: "Zgjedh pacientin",
-      width: '100%'
-    });
-
-    // Inicializo Select2 për modalin e editimit
-    $('#edit-doctor').select2({
-      dropdownParent: $('#editAppointmentModal'),
-      placeholder: "Zgjedh doktorin",
-      width: '100%'
-    });
-
-    $('#edit-patient').select2({
-      dropdownParent: $('#editAppointmentModal'),
-      placeholder: "Zgjedh pacientin",
-      width: '100%'
-    });
-
-
-      // Edit Termin
-    $('.edit-appointment-btn').on('click', function () {
-      const id = $(this).data('id');
-      const doctorId = $(this).data('doctor');
-      const patientId = $(this).data('patient');
-      const date = $(this).data('date');
-      const time = $(this).data('time');
-      const status = $(this).data('status');
-
-      $('#edit-id').val(id);
-      $('#edit-doctor').val(doctorId).trigger('change');
-      $('#edit-patient').val(patientId).trigger('change');
-      $('#edit-date').val(date);
-      $('#edit-time').val(time);
-      $('#edit-status').val(status);
-
-      $('#editAppointmentModal').modal('show');
-    });
-
-  // Delete Termin
-  $('.delete-appointment-btn').on('click', function () {
-      const id = $(this).data('id');
-
-      $('#delete-id').val(id);
-      $('#deleteAppointmentModal').modal('show');
-    });
-  });
-
-  document.addEventListener('DOMContentLoaded', function () {
-    const urlParams = new URLSearchParams(window.location.search);
-    const added = urlParams.get("added");
-    const updated = urlParams.get("updated");
-    const deleted = urlParams.get("deleted");
-
-    if (added === "true") {
-      Swal.fire({
-        icon: 'success',
-        title: 'Sukses!',
-        text: 'Termini u caktua me sukses.',
-        confirmButtonColor: '#3085d6',
-        confirmButtonText: 'OK',
-        timer: 1500,
-        timerProgressBar: true,
-      }).then(() => {
-        const newUrl = window.location.origin + window.location.pathname;
-        window.history.replaceState({}, document.title, newUrl);
-      });
-    } else if (updated === "true") {
-      Swal.fire({
-        icon: 'success',
-        title: 'Sukses!',
-        text: 'Termini u perditsua me sukses.',
-        confirmButtonColor: '#3085d6',
-        confirmButtonText: 'OK',
-        timer: 1500,
-        timerProgressBar: true,
-      }).then(() => {
-        // Hiqe query param nga URL pas mbylljes
-        const newUrl = window.location.origin + window.location.pathname;
-        window.history.replaceState({}, document.title, newUrl);
-      });
-    } else if (deleted === "true") {
-      Swal.fire({
-        icon: 'success',
-        title: 'Sukses!',
-        text: 'Termini u fshi me sukses.',
-        confirmButtonColor: '#3085d6',
-        confirmButtonText: 'OK',
-        timer: 1500,
-        timerProgressBar: true,
-      }).then(() => {
-        // Hiqe query param nga URL pas mbylljes
-        const newUrl = window.location.origin + window.location.pathname;
-        window.history.replaceState({}, document.title, newUrl);
-      });
-    }
-  });
-</script>
+<script src="/js/select/select.js"></script>
+<script src="/js/modals/modals.js"></script>
+<script src="/js/swal/swal.js"></script>
 
 
 <%- include("../partials/footer.ejs") %>
