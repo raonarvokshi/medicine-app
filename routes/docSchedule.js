@@ -40,6 +40,7 @@ router.get('/view/doctor-schedules', authenticateToken, async (req, res) => {
 // POST - Shto orar të ri
 router.post('/add/doctor-schedule', authenticateToken, async (req, res) => {
     const { doctor_id, location_id, weekday_hours, visit_duration } = req.body;
+    console.log(`DOCTOR ID ${doctor_id} LOCATION ID ${location_id} WEEKDAY HOURSE ${weekday_hours} VISIT DURATION ${visit_duration}`)
 
     try {
         await db.query(`

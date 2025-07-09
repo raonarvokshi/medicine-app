@@ -1,6 +1,14 @@
 <%- include("../partials/header.ejs") %>
 <%- include("../partials/navbar.ejs") %>
 
+<style>
+    .weekday-hours-cell {
+        max-width: 300px;
+        white-space: normal;
+    }
+
+</style>
+
 <div class="container-fluid">
   <div class="row">
     <%- include("../partials/sidebar.ejs") %>
@@ -11,6 +19,8 @@
           <i class="fas fa-plus-circle"></i> Shto orar
         </button>
         <h1 class="dash-page__title">Shiko oraret e doktorëve</h1>
+        <div class=""></div>
+        <div class=""></div>
       </div>
 
       <div class="card shadow">
@@ -29,29 +39,34 @@
             <tbody>
               <% schedules.forEach((schedule, index) => { %>
                 <tr>
-                  <td><%= index + 1 %></td>
-                  <td><%= schedule.doctor_name %></td>
-                  <td><%= schedule.location_name %></td>
-                  <td>
-                    <% Object.entries(schedule.weekday_hours).forEach(([day, time]) => { %>
-                      <div><strong><%= day %>:</strong> <%= time.start %> - <%= time.end %></div>
-                    <% }) %>
-                  </td>
-                  <td><%= schedule.visit_duration %> min</td>
-                  <td>
-                    <a href="#" class="btn btn-warning btn-sm edit-schedule-btn"
-                      data-id="<%= schedule.id %>"
-                      data-doctor="<%= schedule.doctor_id %>"
-                      data-location="<%= schedule.location_id %>"
-                      data-weekday-hours='<%= JSON.stringify(schedule.weekday_hours) %>'
-                      data-visit-duration="<%= schedule.visit_duration %>">
-                      <i class="fa-solid fa-pen-to-square"></i>
-                    </a>
-                    <a href="#" class="btn btn-danger btn-sm delete-schedule-btn"
-                      data-id="<%= schedule.id %>">
-                      <i class="fa-solid fa-trash"></i>
-                    </a>
-                  </td>
+                    <td><%= index + 1 %></td>
+                    <td><%= schedule.doctor_name %></td>
+                    <td><%= schedule.location_name %></td>
+                    <td>
+                        <button class="btn btn-outline-primary btn-sm view-hours-btn"
+                            data-doctor="<%= schedule.doctor_name %>"
+                            data-hours='<%= JSON.stringify(schedule.weekday_hours) %>'
+                            data-bs-toggle="modal"
+                            data-bs-target="#viewHoursModal">
+                            Shiko oraret
+                        </button>
+                    </td>
+
+                    <td><%= schedule.visit_duration %> min</td>
+                    <td>
+                        <a href="#" class="btn btn-warning btn-sm edit-schedule-btn"
+                        data-id="<%= schedule.id %>"
+                        data-doctor="<%= schedule.doctor_id %>"
+                        data-location="<%= schedule.location_id %>"
+                        data-weekday-hours='<%= JSON.stringify(schedule.weekday_hours) %>'
+                        data-visit-duration="<%= schedule.visit_duration %>">
+                        <i class="fa-solid fa-pen-to-square"></i>
+                        </a>
+                        <a href="#" class="btn btn-danger btn-sm delete-schedule-btn"
+                        data-id="<%= schedule.id %>">
+                        <i class="fa-solid fa-trash"></i>
+                        </a>
+                    </td>
                 </tr>
               <% }) %>
             </tbody>
@@ -100,14 +115,25 @@
           <div class="row">
             <% const days = ["E Hënë", "E Martë", "E Mërkurë", "E Enjte", "E Premte", "E Shtunë", "E Diel"]; %>
             <% days.forEach((day, i) => { %>
-              <div class="col-md-6 mb-2">
-                <label class="form-label"><%= day %></label>
-                <div class="input-group">
-                  <input type="time" class="form-control" name="weekday_hours[<%= day %>][start]">
-                  <span class="input-group-text">deri</span>
-                  <input type="time" class="form-control" name="weekday_hours[<%= day %>][end]">
-                </div>
-              </div>
+                <% if (day !== "E Diel") { %>
+                    <div class="col-md-6 mb-2">
+                        <label class="form-label"><%= day %></label>
+                        <div class="input-group">
+                        <input type="time" class="form-control" name="weekday_hours[<%= day %>][start]">
+                        <span class="input-group-text">deri</span>
+                        <input type="time" class="form-control" name="weekday_hours[<%= day %>][end]">
+                        </div>
+                    </div>
+                <% } else { %>
+                    <div class="col-md-12 mb-2">
+                        <label class="form-label"><%= day %></label>
+                        <div class="input-group">
+                        <input type="time" class="form-control" name="weekday_hours[<%= day %>][start]">
+                        <span class="input-group-text">deri</span>
+                        <input type="time" class="form-control" name="weekday_hours[<%= day %>][end]">
+                        </div>
+                    </div>
+                <% } %>
             <% }) %>
           </div>
         </div>
@@ -120,6 +146,110 @@
       </div>
       <div class="modal-footer">
         <button type="submit" class="btn btn-primary">Ruaj</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+
+<!-- Modal për Shfaqjen e Orarit -->
+<div class="modal fade" id="viewHoursModal" tabindex="-1" aria-labelledby="viewHoursModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="viewHoursModalLabel">Oraret e doktorit</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Mbyll"></button>
+      </div>
+      <div class="modal-body">
+        <div id="modal-doctor-name" class="fw-bold mb-3"></div>
+        <ul id="modal-hours-list" class="list-group"></ul>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Mbyll</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<!-- Modal për Editim Orari -->
+<div class="modal fade" id="editScheduleModal" tabindex="-1" aria-labelledby="editScheduleLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <form action="/edit/doctor-schedule" method="POST" class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Ndrysho Orarin</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Mbyll"></button>
+      </div>
+      <div class="modal-body">
+        <input type="hidden" name="id" id="edit-id">
+
+        <div class="mb-3">
+          <label class="form-label">Doktori</label>
+          <select class="form-select" id="edit-doctor" name="doctor_id" required>
+            <% doctors.forEach(d => { %>
+              <option value="<%= d.id %>"><%= d.full_name %></option>
+            <% }) %>
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label">Njësia organizative</label>
+          <select class="form-select" id="edit-location" name="location_id" required>
+            <% locations.forEach(l => { %>
+              <option value="<%= l.id %>"><%= l.name %></option>
+            <% }) %>
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label">Oraret sipas ditëve</label>
+          <div class="row">
+            <% days.forEach((day, i) => { %>
+              <div class="col-md-6 mb-2">
+                <label class="form-label"><%= day %></label>
+                <div class="input-group">
+                  <input type="time" class="form-control edit-time-start" name="weekday_hours[<%= day %>][start]" data-day="<%= day %>">
+                  <span class="input-group-text">deri</span>
+                  <input type="time" class="form-control edit-time-end" name="weekday_hours[<%= day %>][end]" data-day="<%= day %>">
+                </div>
+              </div>
+            <% }) %>
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label">Kohëzgjatja e vizitës (në minuta)</label>
+          <input type="number" class="form-control" id="edit-visit-duration" name="visit_duration" required min="1">
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="submit" class="btn btn-primary">Ruaj Ndryshimet</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+
+
+
+<!-- Modal për Fshirje Orari -->
+<div class="modal fade" id="deleteScheduleModal" tabindex="-1" aria-labelledby="deleteScheduleLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <form action="/delete/doctor-schedule" method="POST" class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title text-danger" id="deleteScheduleLabel">
+          <i class="fa-solid fa-trash"></i>&nbsp; Konfirmo fshirjen
+        </h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Mbyll"></button>
+      </div>
+      <div class="modal-body">
+        <input type="hidden" name="id" id="delete-id">
+        <p>A jeni i sigurt që dëshironi të fshini këtë orar të doktorit?</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Anulo</button>
+        <button type="submit" class="btn btn-danger">Fshij</button>
       </div>
     </form>
   </div>
@@ -148,5 +278,72 @@
 <script src="/js/select/select.js"></script>
 <script src="/js/modals/modals.js"></script>
 <script src="/js/swal/swal.js"></script>
+
+<script>
+    // Shfaq Oraret - Modal Info
+    $('.view-hours-btn').on('click', function () {
+    const doctorName = $(this).data('doctor');
+    const hours = $(this).data('hours'); // kjo vjen si objekt JSON automatikisht me jQuery
+    const orderedDays = [
+        "E Hënë", "E Martë", "E Mërkurë", "E Enjte",
+        "E Premte", "E Shtunë", "E Diel"
+    ];
+
+    $('#modal-doctor-name').text(doctorName);
+    const $list = $('#modal-hours-list');
+    $list.empty();
+
+    orderedDays.forEach(day => {
+        if (hours[day]) {
+        const li = `
+            <li class="list-group-item d-flex justify-content-between">
+            <span><strong>${day}</strong></span>
+            <span>${hours[day].start} - ${hours[day].end}</span>
+            </li>`;
+        $list.append(li);
+        }
+    });
+
+    $('#viewHoursModal').modal('show');
+    });
+
+    // Edit Orari
+    $('.edit-schedule-btn').on('click', function () {
+    const id = $(this).data('id');
+    const doctorId = $(this).data('doctor');
+    const locationId = $(this).data('location');
+    const visitDuration = $(this).data('visit-duration');
+    const hours = $(this).data('weekday-hours');
+
+    $('#edit-id').val(id);
+    $('#edit-doctor').val(doctorId).trigger('change');
+    $('#edit-location').val(locationId).trigger('change');
+    $('#edit-visit-duration').val(visitDuration);
+
+    // vendos oraret ne input fields sipas ditëve
+    const days = ["E Hënë", "E Martë", "E Mërkurë", "E Enjte", "E Premte", "E Shtunë", "E Diel"];
+    days.forEach(day => {
+        if (hours[day]) {
+        $(`input.edit-time-start[data-day="${day}"]`).val(hours[day].start);
+        $(`input.edit-time-end[data-day="${day}"]`).val(hours[day].end);
+        } else {
+        $(`input.edit-time-start[data-day="${day}"]`).val('');
+        $(`input.edit-time-end[data-day="${day}"]`).val('');
+        }
+    });
+
+    $('#editScheduleModal').modal('show');
+    });
+    
+
+    // Delete Orari
+    $('.delete-schedule-btn').on('click', function () {
+    const id = $(this).data('id');
+    $('#delete-id').val(id);
+    $('#deleteScheduleModal').modal('show');
+    });
+
+
+</script>
 
 <%- include("../partials/footer.ejs") %>
