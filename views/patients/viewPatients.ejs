@@ -110,10 +110,13 @@
 
 <%- include("../partials/modals/patientModals.ejs") %>
 
-<!-- DataTables and Plugins -->
+<!-- DataTables -->
 <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+
+<!-- DataTables Buttons -->
+<link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.4.1/css/buttons.dataTables.min.css">
 <script src="https://cdn.datatables.net/buttons/2.4.1/js/dataTables.buttons.min.js"></script>
 <script src="https://cdn.datatables.net/buttons/2.4.1/js/buttons.html5.min.js"></script>
 <script src="https://cdn.datatables.net/buttons/2.4.1/js/buttons.print.min.js"></script>
@@ -121,170 +124,11 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/pdfmake.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/vfs_fonts.js"></script>
 
-<script>
-$(document).ready(function () {
-    $('#patientsTable tfoot input').on('keyup change', function () {
-      const table = $('#patientsTable').DataTable();
-      const colIndex = $(this).parent().index();
-      table.column(colIndex).search(this.value).draw();
-    });
-  const table = $('#patientsTable').DataTable({
-    language: {
-      url: 'https://cdn.datatables.net/plug-ins/1.13.6/i18n/sq.json'
-    },
-    dom: 'Bfrtip',
-    pageLength: 5,
-    buttons: [
-      {
-        extend: 'excelHtml5',
-        text: '<i class="fas fa-file-excel"></i>',
-        className: 'btn btn-success me-2 mb-4'
-      },
-      {
-        extend: 'pdfHtml5',
-        text: '<i class="fas fa-file-pdf"></i>',
-        className: 'btn btn-danger me-2 mb-4'
-      },
-      {
-        extend: 'print',
-        text: '<i class="fas fa-print"></i>',
-        className: 'btn btn-secondary mb-4'
-      }
-    ],
-  });
-
-    // Hiq klasen dt-button dhe zëvendëso me klasat tona plotësisht
-    setTimeout(() => {
-      $('.dt-button').removeClass('dt-button');
-    }, 100);
-
-    $('.view-patient-btn').click(function () {
-      const data = $(this).data();
-      $('#modal-first').text(data.first);
-      $('#modal-parent').text(data.parent);
-      $('#modal-last').text(data.last);
-      $('#modal-gender').text(data.gender === 'm' ? 'Mashkull' : 'Femër');
-      $('#modal-email').text(data.email);
-      $('#modal-birthday').text(new Date(data.birthday).toLocaleDateString('en-GB'));
-      $('#modal-age-type').text(translateAgeType(data.ageType));
-      $('#modal-personalnum').text(data.personalnum);
-      $('#modal-city').text(data.city);
-      $('#modal-address').text(data.address);
-      $('#modal-insurance').text(data.insurance === 'hasInsurance' ? 'Ka sigurim' : 'S\'ka sigurim');
-      $('#modal-comment').text(data.comment || 'S\'ka koment');
-      if (data.updated) {
-        const updatedDate = new Date(data.updated);
-        const date = updatedDate.toLocaleDateString('en-GB');
-        const time = updatedDate.toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' });
-        $('#modal-updated').text(`${date} ${time}`);
-      } else {
-        $('#modal-updated').text('Nuk është përditësuar ndonjëherë');
-      }
-
-      $('#viewPatientModal').modal('show');
-    });
-
-  $('.edit-patient-btn').click(function () {
-    const data = $(this).data();
-    $('#edit-id').val(data.id);
-    $('#fName').val(data.first);
-    $('#parentsName').val(data.parent);
-    $('#lName').val(data.last);
-    $('#gender').val(data.gender);
-    $('#email').val(data.email);
-
-    const birthday = new Date(data.birthday);
-    const day = String(birthday.getDate()).padStart(2, '0');
-    const month = String(birthday.getMonth() + 1).padStart(2, '0'); // muajt fillojnë nga 0
-    const year = birthday.getFullYear();
-    const formattedBirthday = `${year}-${month}-${day}`; // yyyy-mm-dd për input[type=date]
-    $('#birthday').val(formattedBirthday);
-
-
-
-    $('#ageType').val(data.ageType);
-    $('#personalNum').val(data.personalnum);
-    $('#city').val(data.city);
-    $('#address').val(data.address);
-    $('#comment').val(data.comment);
-    $('#insurance').val(data.insurance);
-    $('#editPatientModal').modal('show');
-  });
-
-
-    $('.delete-patient-btn').click(function () {
-      const data = $(this).data();
-      $('#delete-id').val(data.id);
-      $('#delete-fullname').text(`${data.first} ${data.parent} ${data.last}`);
-      $('#deletePatientModal').modal('show');
-    });
-
-    function translateAgeType(type) {
-      switch(type) {
-        case 'years': return 'Vjet';
-        case 'months': return 'Muaj';
-        case 'weeks': return 'Javë';
-        case 'days': return 'Ditë';
-        case 'hours': return 'Orë';
-        default: return type;
-      }
-    }
-  });
-</script>
-
-
-<script>
-  $(document).ready(function () {
-    const urlParams = new URLSearchParams(window.location.search);
-    const added = urlParams.get("added");
-    const updated = urlParams.get("updated");
-    const deleted = urlParams.get("deleted");
-
-    if (added === "true") {
-      Swal.fire({
-        icon: 'success',
-        title: 'Sukses!',
-        text: 'Pacienti u shtua me sukses.',
-        confirmButtonColor: '#3085d6',
-        confirmButtonText: 'OK',
-        timer: 1500,
-        timerProgressBar: true,
-      }).then(() => {
-        // Pas klikimit OK, hiqe query param nga URL
-        const newUrl = window.location.origin + window.location.pathname;
-        window.history.replaceState({}, document.title, newUrl);
-      });
-    } else if (updated === "true") {
-      Swal.fire({
-        icon: 'success',
-        title: 'Sukses!',
-        text: 'Pacienti u perditsua me sukses.',
-        confirmButtonColor: '#3085d6',
-        confirmButtonText: 'OK',
-        timer: 1500,
-        timerProgressBar: true,
-      }).then(() => {
-        // Hiqe query param nga URL pas mbylljes
-        const newUrl = window.location.origin + window.location.pathname;
-        window.history.replaceState({}, document.title, newUrl);
-      });
-    } else if (deleted === "true") {
-      Swal.fire({
-        icon: 'success',
-        title: 'Sukses!',
-        text: 'Pacienti u fshi me sukses.',
-        confirmButtonColor: '#3085d6',
-        confirmButtonText: 'OK',
-        timer: 1500,
-        timerProgressBar: true,
-      }).then(() => {
-        // Hiqe query param nga URL pas mbylljes
-        const newUrl = window.location.origin + window.location.pathname;
-        window.history.replaceState({}, document.title, newUrl);
-      });
-    }
-  });
-</script>
+<!-- MY SCRIPTS -->
+<script src="/js/tables/tables.js"></script>
+<script src="/js/modals/modals.js"></script>
+<script src="/js/swal/swal.js"></script>
+<script src="/js/tooltips/tooltips.js"></script>
 
 
 

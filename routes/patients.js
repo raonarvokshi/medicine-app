@@ -41,7 +41,7 @@ router.post("/add/patient", authenticateToken, async (req, res) => {
             ]
         );
 
-        res.redirect("/view/patients?added=true");
+        res.redirect("/view/patients?patientAdded=true");
     } catch (err) {
         console.error("Error inserting patient:", err.message);
         res.redirect("/view/patients");
@@ -119,7 +119,7 @@ router.post("/edit/patient", authenticateToken, async (req, res) => {
             ]
         );
 
-        res.redirect("/view/patients?updated=true");
+        res.redirect("/view/patients?patientUpdated=true");
     } catch (err) {
         console.error("Gabim gjatë përditësimit të pacientit:", err);
         res.status(500).send("Gabim gjatë përditësimit të pacientit");
@@ -132,7 +132,7 @@ router.post("/delete/patient", authenticateToken, async (req, res) => {
     const { id } = req.body;
     try {
         await db.query("DELETE FROM patients WHERE id = $1", [id]);
-        res.redirect("/view/patients?deleted=true");
+        res.redirect("/view/patients?patientDeleted=true");
     } catch (err) {
         console.error(err);
         res.status(500).send("Gabim gjatë fshirjes së pacientit");

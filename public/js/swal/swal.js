@@ -1,4 +1,5 @@
 document.addEventListener('DOMContentLoaded', function () {
+    // APPOINTMENTS
     const appointmentURLParams = new URLSearchParams(window.location.search);
     const addedAppointment = appointmentURLParams.get("appointmentAdded");
     const updatedAppointment = appointmentURLParams.get("appointmentUpdated");
@@ -47,6 +48,8 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 
+
+    // NJESIA ORGANIZATIVE
     const locationURLParams = new URLSearchParams(window.location.search);
     const locationAdded = locationURLParams.get("locationAdded");
     const locationUpdated = locationURLParams.get("locationUpdated");
@@ -96,7 +99,7 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 
-
+    // REFERUESIT
     const refURLParams = new URLSearchParams(window.location.search);
     const refAdded = refURLParams.get("refAdded");
     const refUpdated = refURLParams.get("refUpdated");
@@ -141,6 +144,57 @@ document.addEventListener('DOMContentLoaded', function () {
             timerProgressBar: true,
         }).then(() => {
             // Pas klikimit OK, hiqe query param nga URL
+            const newUrl = window.location.origin + window.location.pathname;
+            window.history.replaceState({}, document.title, newUrl);
+        });
+    }
+
+
+    // PACIENTAT
+    const urlParams = new URLSearchParams(window.location.search);
+    const patientAdded = urlParams.get("patientAdded");
+    const patientUpdated = urlParams.get("patientUpdated");
+    const patientDeleted = urlParams.get("patientDeleted");
+
+    if (patientAdded === "true") {
+        Swal.fire({
+            icon: 'success',
+            title: 'Sukses!',
+            text: 'Pacienti u shtua me sukses.',
+            confirmButtonColor: '#3085d6',
+            confirmButtonText: 'OK',
+            timer: 1500,
+            timerProgressBar: true,
+        }).then(() => {
+            // Pas klikimit OK, hiqe query param nga URL
+            const newUrl = window.location.origin + window.location.pathname;
+            window.history.replaceState({}, document.title, newUrl);
+        });
+    } else if (patientUpdated === "true") {
+        Swal.fire({
+            icon: 'success',
+            title: 'Sukses!',
+            text: 'Pacienti u perditsua me sukses.',
+            confirmButtonColor: '#3085d6',
+            confirmButtonText: 'OK',
+            timer: 1500,
+            timerProgressBar: true,
+        }).then(() => {
+            // Hiqe query param nga URL pas mbylljes
+            const newUrl = window.location.origin + window.location.pathname;
+            window.history.replaceState({}, document.title, newUrl);
+        });
+    } else if (patientDeleted === "true") {
+        Swal.fire({
+            icon: 'success',
+            title: 'Sukses!',
+            text: 'Pacienti u fshi me sukses.',
+            confirmButtonColor: '#3085d6',
+            confirmButtonText: 'OK',
+            timer: 1500,
+            timerProgressBar: true,
+        }).then(() => {
+            // Hiqe query param nga URL pas mbylljes
             const newUrl = window.location.origin + window.location.pathname;
             window.history.replaceState({}, document.title, newUrl);
         });
