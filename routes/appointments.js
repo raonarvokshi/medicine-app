@@ -59,7 +59,7 @@ router.post("/add/appointment", authenticateToken, async (req, res) => {
             [doctor_id, patient_id, date, time, status]
         );
 
-        res.redirect("/view/appointments?added=true");
+        res.redirect("/view/appointments?appointmentAdded=true");
     } catch (err) {
         console.error(err);
         res.status(500).send("Problem gjat shtimit te terminit (problem i programit)");
@@ -86,7 +86,7 @@ router.post("/edit/appointment", authenticateToken, async (req, res) => {
             [doctor_id, patient_id, date, time, status, id]
         );
 
-        res.redirect("/view/appointments?updated=true");
+        res.redirect("/view/appointments?appointmentUpdated=true");
     } catch (err) {
         console.error(err);
         res.status(500).send("Problem gjat editimit te terminit (problem i programit)");
@@ -103,7 +103,7 @@ router.post("/delete/appointment", authenticateToken, async (req, res) => {
 
     try {
         await db.query("DELETE FROM appointments WHERE id = $1", [id]);
-        res.redirect("/view/appointments?deleted=true");
+        res.redirect("/view/appointments?appointmentDeleted=true");
     } catch (err) {
         console.error(err);
         res.status(500).send("Problem gjat fshirjes se terminit (problem i programit)");

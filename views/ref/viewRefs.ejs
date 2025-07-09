@@ -122,26 +122,6 @@
 <script src="/js/tables/tables.js"></script>
 <script src="/js/modals/modals.js"></script>
 <script src="/js/tooltips/tooltips.js"></script>
-
-<script>
-  $(document).ready(function () {
-    const urlParams = new URLSearchParams(window.location.search);
-    const added = urlParams.get("added");
-
-    if (added === "true") {
-      Swal.fire({
-        icon: 'success',
-        title: 'Sukses!',
-        text: 'Referuesi u shtua me sukses.',
-        confirmButtonColor: '#3085d6',
-        confirmButtonText: 'OK'
-      }).then(() => {
-        // Pas klikimit OK, hiqe query param nga URL
-        const newUrl = window.location.origin + window.location.pathname;
-        window.history.replaceState({}, document.title, newUrl);
-      });
-    }
-  });
-</script>
+<script src="/js/swal/swal.js"></script>
 
 <%- include("../partials/footer.ejs") %>

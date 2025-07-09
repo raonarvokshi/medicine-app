@@ -1,8 +1,8 @@
 document.addEventListener('DOMContentLoaded', function () {
     const appointmentURLParams = new URLSearchParams(window.location.search);
-    const addedAppointment = appointmentURLParams.get("added");
-    const updatedAppointment = appointmentURLParams.get("updated");
-    const deletedApppintment = appointmentURLParams.get("deleted");
+    const addedAppointment = appointmentURLParams.get("appointmentAdded");
+    const updatedAppointment = appointmentURLParams.get("appointmentUpdated");
+    const deletedApppintment = appointmentURLParams.get("appointmentDeleted");
 
     if (addedAppointment === "true") {
         Swal.fire({
@@ -48,9 +48,9 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     const locationURLParams = new URLSearchParams(window.location.search);
-    const locationAdded = locationURLParams.get("added");
-    const locationUpdated = locationURLParams.get("updated");
-    const locationDeleted = urlParams.get("deleted");
+    const locationAdded = locationURLParams.get("locationAdded");
+    const locationUpdated = locationURLParams.get("locationUpdated");
+    const locationDeleted = locationURLParams.get("locationDeleted");
 
     if (locationAdded === "true") {
         Swal.fire({
@@ -91,6 +91,56 @@ document.addEventListener('DOMContentLoaded', function () {
             timerProgressBar: true,
         }).then(() => {
             // Hiqe query param nga URL pas mbylljes
+            const newUrl = window.location.origin + window.location.pathname;
+            window.history.replaceState({}, document.title, newUrl);
+        });
+    }
+
+
+    const refURLParams = new URLSearchParams(window.location.search);
+    const refAdded = refURLParams.get("refAdded");
+    const refUpdated = refURLParams.get("refUpdated");
+    const refDeleted = refURLParams.get("refDeleted");
+
+    if (refAdded === "true") {
+        Swal.fire({
+            icon: 'success',
+            title: 'Sukses!',
+            text: 'Referuesi u shtua me sukses.',
+            confirmButtonColor: '#3085d6',
+            confirmButtonText: 'OK',
+            timer: 1500,
+            timerProgressBar: true,
+        }).then(() => {
+            // Pas klikimit OK, hiqe query param nga URL
+            const newUrl = window.location.origin + window.location.pathname;
+            window.history.replaceState({}, document.title, newUrl);
+        });
+    } else if (refUpdated === "true") {
+        Swal.fire({
+            icon: 'success',
+            title: 'Sukses!',
+            text: 'Referuesi u perditsua me sukses.',
+            confirmButtonColor: '#3085d6',
+            confirmButtonText: 'OK',
+            timer: 1500,
+            timerProgressBar: true,
+        }).then(() => {
+            // Pas klikimit OK, hiqe query param nga URL
+            const newUrl = window.location.origin + window.location.pathname;
+            window.history.replaceState({}, document.title, newUrl);
+        });
+    } else if (refDeleted === "true") {
+        Swal.fire({
+            icon: 'success',
+            title: 'Sukses!',
+            text: 'Referuesi u fshi me sukses.',
+            confirmButtonColor: '#3085d6',
+            confirmButtonText: 'OK',
+            timer: 1500,
+            timerProgressBar: true,
+        }).then(() => {
+            // Pas klikimit OK, hiqe query param nga URL
             const newUrl = window.location.origin + window.location.pathname;
             window.history.replaceState({}, document.title, newUrl);
         });

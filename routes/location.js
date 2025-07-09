@@ -30,7 +30,7 @@ router.post("/add/location", authenticateToken, async (req, res) => {
 
     try {
         await db.query("INSERT INTO location (name) VALUES($1)", [name]);
-        res.redirect("/view/location?added=true")
+        res.redirect("/view/location?locationAdded=true")
     } catch (err) {
         console.error(err);
         res.status(500).send("Problem duke shtuar njesin organizative (problem i programit)")
@@ -41,7 +41,7 @@ router.post("/edit/location", authenticateToken, async (req, res) => {
     const { id, name } = req.body;
     try {
         await db.query("UPDATE location SET name = $1 WHERE id = $2", [name, id]);
-        res.redirect("/view/location?updated=true");
+        res.redirect("/view/location?locationUpdated=true");
     } catch (err) {
         console.error(err);
         res.status(500).send("Problem duke perditsuar njesin organizative (problem i programit)");
@@ -53,7 +53,7 @@ router.post("/delete/location", authenticateToken, async (req, res) => {
 
     try {
         await db.query("DELETE FROM location WHERE id = $1", [id]);
-        res.redirect("/view/location?deleted=true");
+        res.redirect("/view/location?locationDeleted=true");
     } catch (err) {
         console.error(err);
         res.status(500).send("Problem duke fshir njesin organizative (problem i programit)");
