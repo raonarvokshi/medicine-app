@@ -21,7 +21,7 @@
 
       <div class="card shadow">
         <div class="card-body">
-          <table id="refsTable" class="table table-bordered table-striped">
+          <table id="locationsTable" class="table table-bordered table-striped">
             <thead class="table-light">
               <tr>
                 <th>#</th>
@@ -78,125 +78,11 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/pdfmake.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/vfs_fonts.js"></script>
 
-
-<script>
-  $(document).ready(function () {
-    const table = $('#refsTable').DataTable({
-      responsive: true,
-      language: {
-        url: 'https://cdn.datatables.net/plug-ins/1.13.6/i18n/sq.json'
-      },
-      dom: 'Bfrtip',
-      pageLength: 5,
-      buttons: [
-        {
-          extend: 'excelHtml5',
-          text: '<i class="fas fa-file-excel"></i>',
-          className: 'btn btn-success me-2 mb-4'
-        },
-        {
-          extend: 'pdfHtml5',
-          text: '<i class="fas fa-file-pdf"></i>',
-          className: 'btn btn-danger me-2 mb-4'
-        },
-        {
-          extend: 'print',
-          text: '<i class="fas fa-print"></i>',
-          className: 'btn btn-secondary mb-4'
-        }
-      ]
-    });
-
-    // Hiq klasen dt-button dhe zëvendëso me klasat tona plotësisht
-    setTimeout(() => {
-      $('.dt-button').removeClass('dt-button');
-    }, 100);
-
-        // Shfaq modalin dhe mbush të dhënat kur klikohet edit
-    $('.edit-location-btn').on('click', function () {
-      const id = $(this).data('id');
-      const name = $(this).data('name');
-
-      $('#edit-id').val(id);
-      $('#edit-name').val(name);
-
-      $('#editLocationModal').modal('show');
-    });
-  });
-
-  // Kur klikohet butoni për fshirje
-  $('.delete-location-btn').on('click', function () {
-    const id = $(this).data('id');
-    const name = $(this).data('name');
-
-    $('#delete-id').val(id);
-    $('#delete-name').text(name);
-
-    $('#deleteLocationModal').modal('show');
-  });
-</script>
-
-<script>
-  document.addEventListener('DOMContentLoaded', function () {
-    const tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
-    tooltipTriggerList.forEach(function (tooltipTriggerEl) {
-      new bootstrap.Tooltip(tooltipTriggerEl);
-    });
-  });
-</script>
-
-<script>
-  $(document).ready(function () {
-    const urlParams = new URLSearchParams(window.location.search);
-    const added = urlParams.get("added");
-    const updated = urlParams.get("updated");
-    const deleted = urlParams.get("deleted");
-
-    if (added === "true") {
-      Swal.fire({
-        icon: 'success',
-        title: 'Sukses!',
-        text: 'Njesia organizative u shtua me sukses.',
-        confirmButtonColor: '#3085d6',
-        confirmButtonText: 'OK',
-        timer: 1500,
-        timerProgressBar: true,
-      }).then(() => {
-        // Hiqe query param nga URL pas mbylljes
-        const newUrl = window.location.origin + window.location.pathname;
-        window.history.replaceState({}, document.title, newUrl);
-      });
-    } else if (updated === "true") {
-      Swal.fire({
-        icon: 'success',
-        title: 'Sukses!',
-        text: 'Njesia organizative u perditsua me sukses.',
-        confirmButtonColor: '#3085d6',
-        confirmButtonText: 'OK',
-        timer: 1500,
-        timerProgressBar: true,
-      }).then(() => {
-        // Hiqe query param nga URL pas mbylljes
-        const newUrl = window.location.origin + window.location.pathname;
-        window.history.replaceState({}, document.title, newUrl);
-      });
-    } else if (deleted === "true") {
-      Swal.fire({
-        icon: 'success',
-        title: 'Sukses!',
-        text: 'Njesia organizative u fshi me sukses.',
-        confirmButtonColor: '#3085d6',
-        confirmButtonText: 'OK',
-        timer: 1500,
-        timerProgressBar: true,
-      }).then(() => {
-        // Hiqe query param nga URL pas mbylljes
-        const newUrl = window.location.origin + window.location.pathname;
-        window.history.replaceState({}, document.title, newUrl);
-      });
-    }
-  });
-</script>
+<!-- MY SCRIPTS -->
+<script src="/js/tables/tables.js"></script>
+<script src="/js/modals/modals.js"></script>
+<script src="/js/tooltips/tooltips.js"></script>
+<script src="/js/swal/swal.js"></script>
 
 
 <%- include("../partials/footer.ejs") %>
