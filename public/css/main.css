@@ -4,11 +4,6 @@
     --bg-hover: #049edb;
 }
 
-/* 
-body {
-    overflow-y: hidden;
-} */
-
 .nav-link__wrapper.active {
     background-color: #dad8d8;
     /* opsionale */
@@ -253,7 +248,7 @@ body {
 /* Sidebar base */
 .sidebar {
     height: 100vh;
-    position: fixed;
+    position: absolute;
     top: 81px;
     /* adjust based on navbar height */
     overflow-y: auto;
