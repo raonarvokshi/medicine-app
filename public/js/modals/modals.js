@@ -155,3 +155,32 @@ function translateAgeType(type) {
         default: return type;
     }
 }
+
+
+
+// DOKTORAT
+$('.edit-doctor-btn').on('click', function () {
+    const id = $(this).data('id');
+    const name = $(this).data('name');
+    const department = $(this).data('department');
+    const tel = $(this).data('tel');
+    const email = $(this).data('email');
+
+    $('#edit-id').val(id);
+    $('#edit-name').val(name);
+    $('#edit-department').val(department);
+    $('#edit-tel').val(tel);
+    $('#edit-email').val(email);
+
+    $('#editDoctorModal').modal('show');
+});
+
+$('.delete-doctor-btn').on('click', function () {
+    const id = $(this).data('id');
+    const name = $(this).data('name');
+
+    $('#delete-id').val(id);
+    $('#delete-name').text(name);
+
+    $('#deleteDoctorModal').modal('show');
+});

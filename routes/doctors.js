@@ -11,7 +11,7 @@ router.post("/add/doctor", authenticateToken, async (req, res) => {
         await db.query("INSERT INTO doctors (full_name, department, tel, email) VALUES($1, $2, $3, $4)",
             [fullName, department, phoneNumber, email]
         );
-        res.redirect("/view/doctors?added=true");
+        res.redirect("/view/doctors?doctorAdded=true");
     } catch (err) {
         res.status(500).send("Internal Server Error");
         console.log(err);
@@ -45,7 +45,7 @@ router.post("/edit/doctor", authenticateToken, async (req, res) => {
             "UPDATE doctors SET full_name=$1, department=$2, tel=$3, email=$4, updated_at=NOW() WHERE id=$5",
             [fullName, department, tel, email, id]
         );
-        res.redirect("/view/doctors?updated=true");
+        res.redirect("/view/doctors?doctorUpdated=true");
     } catch (err) {
         console.error(err);
         res.status(500).send("Gabim gjatë përditësimit");
@@ -57,7 +57,7 @@ router.post("/delete/doctor", authenticateToken, async (req, res) => {
 
     try {
         await db.query("DELETE FROM doctors WHERE id = $1", [id]);
-        res.redirect("/view/doctors?deleted=true");
+        res.redirect("/view/doctors?doctorDeleted=true");
     } catch (err) {
         console.error(err);
         res.status(500).send("Gabim gjatë fshirjes");

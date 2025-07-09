@@ -199,4 +199,55 @@ document.addEventListener('DOMContentLoaded', function () {
             window.history.replaceState({}, document.title, newUrl);
         });
     }
+
+
+
+    // DOKTORAT
+    const doctorURLParams = new URLSearchParams(window.location.search);
+    const doctorAdded = doctorURLParams.get("doctorAdded");
+    const doctorUpdated = doctorURLParams.get("doctorUpdated");
+    const doctorDeleted = doctorURLParams.get("doctorDeleted");
+
+    if (doctorAdded === "true") {
+        Swal.fire({
+            icon: 'success',
+            title: 'Sukses!',
+            text: 'Doktori u shtua me sukses.',
+            confirmButtonColor: '#3085d6',
+            confirmButtonText: 'OK',
+            timer: 1500,
+            timerProgressBar: true,
+        }).then(() => {
+            const newUrl = window.location.origin + window.location.pathname;
+            window.history.replaceState({}, document.title, newUrl);
+        });
+    } else if (doctorUpdated === "true") {
+        Swal.fire({
+            icon: 'success',
+            title: 'Sukses!',
+            text: 'Doktori u perditsua me sukses.',
+            confirmButtonColor: '#3085d6',
+            confirmButtonText: 'OK',
+            timer: 1500,
+            timerProgressBar: true,
+        }).then(() => {
+            // Hiqe query param nga URL pas mbylljes
+            const newUrl = window.location.origin + window.location.pathname;
+            window.history.replaceState({}, document.title, newUrl);
+        });
+    } else if (doctorDeleted === "true") {
+        Swal.fire({
+            icon: 'success',
+            title: 'Sukses!',
+            text: 'Doktori u fshi me sukses.',
+            confirmButtonColor: '#3085d6',
+            confirmButtonText: 'OK',
+            timer: 1500,
+            timerProgressBar: true,
+        }).then(() => {
+            // Hiqe query param nga URL pas mbylljes
+            const newUrl = window.location.origin + window.location.pathname;
+            window.history.replaceState({}, document.title, newUrl);
+        });
+    }
 });
