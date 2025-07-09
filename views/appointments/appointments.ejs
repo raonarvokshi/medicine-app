@@ -11,6 +11,8 @@
           <i class="fas fa-plus-circle"></i> Shto termin
         </button>
         <h1 class="dash-page__title">Shiko Terminet</h1>
+        <div class=""></div>
+        <div class=""></div>
       </div>
 
       <div class="card shadow">
@@ -203,6 +205,15 @@
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
 
+<!-- DataTables Buttons -->
+<link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.4.1/css/buttons.dataTables.min.css">
+<script src="https://cdn.datatables.net/buttons/2.4.1/js/dataTables.buttons.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/2.4.1/js/buttons.html5.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/2.4.1/js/buttons.print.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/pdfmake.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/vfs_fonts.js"></script>
+
 <!-- Select2 CSS -->
 <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 
@@ -221,54 +232,12 @@
 
 <link  href="/css/picker.css" rel="stylesheet">
 <script src="/js/picker.js"></script>
+<script src="/js/tables/tables.js"></script>
 
-  <script>
-  $(function() {
-    $( "#datepicker" ).datepicker({
-      changeMonth: true,
-      changeYear: true,
-      showAnim: "slideDown"
-    });
-  });
-
-  new Picker(document.querySelector('.js-time-picker'), {
-    format: 'HH:mm',
-    headers: true,
-    text: {
-      title: 'Pick a time',
-    },
-  });
-
-  </script>
+<script src="/js/pickers/pickers.js"></script>
 
 <script>
   $(document).ready(function () {
-    $('#appointmentsTable').DataTable({
-      responsive: true,
-      language: {
-        url: 'https://cdn.datatables.net/plug-ins/1.13.6/i18n/sq.json'
-      },
-      dom: 'Bfrtip',
-      pageLength: 5,
-      buttons: [
-        {
-          extend: 'excelHtml5',
-          text: '<i class="fas fa-file-excel"></i>',
-          className: 'btn btn-success me-2 mb-4'
-        },
-        {
-          extend: 'pdfHtml5',
-          text: '<i class="fas fa-file-pdf"></i>',
-          className: 'btn btn-danger me-2 mb-4'
-        },
-        {
-          extend: 'print',
-          text: '<i class="fas fa-print"></i>',
-          className: 'btn btn-secondary mb-4'
-        }
-      ]
-    });
-
     // Inicializo Select2
     $('#doctorSelect').select2({
       dropdownParent: $('#addAppointmentModal'), // Shfaqet korrekt brenda modalit

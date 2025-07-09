@@ -634,7 +634,7 @@ body.dark-mode .select2-container--default .select2-selection--single {
     /* background i zi */
     color: #fff !important;
     /* teksti i bardhë */
-    border: 1px solid #ced4da;
+    border: 1px solid #3b3b3b;
 }
 
 body.dark-mode .select2-container--default .select2-selection--single .select2-selection__rendered {
