@@ -152,14 +152,18 @@
           </select>
         </div>
 
+        <!-- Data (me datepicker) -->
         <div class="mb-3">
           <label class="form-label">Data</label>
-          <input type="date" class="form-control" name="date" id="edit-date" required>
+          <input type="text" class="form-control" id="edit-datepicker" name="date" required>
         </div>
 
+        <!-- Ora (select që mbushet me slotet) -->
         <div class="mb-3">
           <label class="form-label">Ora</label>
-          <input type="time" class="form-control" name="time" id="edit-time" required>
+          <select class="form-select js-edit-time-picker" id="edit-time" name="time" disabled required>
+            <option value="">Zgjedh orarin</option>
+          </select>
         </div>
 
         <div class="mb-3">
