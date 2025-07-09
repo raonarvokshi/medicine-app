@@ -6,10 +6,14 @@ $(function () {
     });
 });
 
-new Picker(document.querySelector('.js-time-picker'), {
-    format: 'HH:mm',
-    headers: true,
-    text: {
-        title: 'Pick a time',
-    },
+const allTimeInputs = document.querySelectorAll(".js-time-picker");
+
+allTimeInputs.forEach(input => {
+    new Picker(input, {
+        format: 'HH:mm',
+        headers: true,
+        text: {
+            title: 'Zgjedh oren',
+        },
+    });
 });

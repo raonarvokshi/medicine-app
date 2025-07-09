@@ -119,18 +119,18 @@
                     <div class="col-md-6 mb-2">
                         <label class="form-label"><%= day %></label>
                         <div class="input-group">
-                        <input type="time" class="form-control" name="weekday_hours[<%= day %>][start]">
-                        <span class="input-group-text">deri</span>
-                        <input type="time" class="form-control" name="weekday_hours[<%= day %>][end]">
+                            <input type="time" class="form-control js-time-picker" name="weekday_hours[<%= day %>][start]">
+                            <span class="input-group-text">deri</span>
+                            <input type="time" class="form-control js-time-picker" name="weekday_hours[<%= day %>][end]">
                         </div>
                     </div>
                 <% } else { %>
                     <div class="col-md-12 mb-2">
                         <label class="form-label"><%= day %></label>
                         <div class="input-group">
-                        <input type="time" class="form-control" name="weekday_hours[<%= day %>][start]">
+                        <input type="time" class="form-control js-time-picker" name="weekday_hours[<%= day %>][start]">
                         <span class="input-group-text">deri</span>
-                        <input type="time" class="form-control" name="weekday_hours[<%= day %>][end]">
+                        <input type="time" class="form-control js-time-picker" name="weekday_hours[<%= day %>][end]">
                         </div>
                     </div>
                 <% } %>
