@@ -6,7 +6,7 @@ $(function () {
     });
 });
 
-const allTimeInputs = document.querySelectorAll(".js-time-picker");
+const allTimeInputs = document.querySelectorAll(".time-picker");
 
 allTimeInputs.forEach(input => {
     new Picker(input, {

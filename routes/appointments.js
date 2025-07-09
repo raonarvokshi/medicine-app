@@ -111,4 +111,93 @@ router.post("/delete/appointment", authenticateToken, async (req, res) => {
     }
 });
 
+router.get("/doctor-available-dates/:doctorId", authenticateToken, async (req, res) => {
+    const { doctorId } = req.params;
+    try {
+        const schedule = await db.query(`
+            SELECT weekday_hours
+            FROM doctor_schedules
+            WHERE doctor_id = $1
+        `, [doctorId]);
+
+        if (schedule.rows.length === 0) {
+            return res.json({ success: false, message: "Nuk u gjet orari për këtë doktor." });
+        }
+
+        const weekdayHours = schedule.rows[0].weekday_hours;
+        const validDays = Object.entries(weekdayHours)
+            .filter(([day, hours]) => hours.start && hours.end)
+            .map(([day]) => day);
+
+        res.json({ success: true, validDays });
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ success: false, message: "Gabim gjatë marrjes së datave të lira." });
+    }
+});
+
+router.get("/doctor-available-times/:doctorId/:date", authenticateToken, async (req, res) => {
+    const { doctorId, date } = req.params;
+
+    // Map i fiksuar për ditët në shqip
+    const dayMap = {
+        "Monday": "E Hënë",
+        "Tuesday": "E Martë",
+        "Wednesday": "E Mërkurë",
+        "Thursday": "E Enjte",
+        "Friday": "E Premte",
+        "Saturday": "E Shtunë",
+        "Sunday": "E Diel"
+    };
+
+    try {
+        const scheduleRes = await db.query(`
+            SELECT weekday_hours, visit_duration
+            FROM doctor_schedules
+            WHERE doctor_id = $1
+        `, [doctorId]);
+
+        if (scheduleRes.rows.length === 0) {
+            return res.json({ success: false });
+        }
+
+        const { weekday_hours, visit_duration } = scheduleRes.rows[0];
+
+        const jsDate = new Date(date);
+        const weekdayEn = jsDate.toLocaleDateString("en-US", { weekday: "long" });
+        const weekday = dayMap[weekdayEn]; // Tani është saktë, p.sh. "E Hënë"
+
+        const hours = weekday_hours[weekday];
+        if (!hours || !hours.start || !hours.end) {
+            return res.json({ success: false, times: [] });
+        }
+
+        const start = hours.start;
+        const end = hours.end;
+        const times = [];
+
+        let [startH, startM] = start.split(":").map(Number);
+        let [endH, endM] = end.split(":").map(Number);
+        const duration = parseInt(visit_duration);
+
+        let current = new Date(jsDate);
+        current.setHours(startH, startM, 0, 0);
+
+        const endDate = new Date(jsDate);
+        endDate.setHours(endH, endM, 0, 0);
+
+        while (current <= endDate) {
+            const hh = current.getHours().toString().padStart(2, "0");
+            const mm = current.getMinutes().toString().padStart(2, "0");
+            times.push(`${hh}:${mm}`);
+            current.setMinutes(current.getMinutes() + duration);
+        }
+
+        res.json({ success: true, times });
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ success: false });
+    }
+});
+
 export default router;

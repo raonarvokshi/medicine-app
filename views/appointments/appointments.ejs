@@ -101,7 +101,9 @@
 
         <div class="mb-3">
           <label class="form-label">Ora</label>
-          <input type="text" class="form-control js-time-picker" name="time" required>
+          <select class="form-select js-time-picker" name="time" disabled required>
+            <option value="">Zgjedh orarin</option>
+          </select>
         </div>
 
         <div class="mb-3">
@@ -225,6 +227,7 @@
 <script src="/js/select/select.js"></script>
 <script src="/js/modals/modals.js"></script>
 <script src="/js/swal/swal.js"></script>
+<script src="/js/appointments/appointments-form.js"></script>
 
 
 <%- include("../partials/footer.ejs") %>

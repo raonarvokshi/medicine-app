@@ -663,3 +663,7 @@ body.dark-mode #modal-hours-list .list-group-item {
     color: #fff;
     border-color: #444;
 }
+
+body.dark-mode .not-working__text {
+    color: #fff;
+}

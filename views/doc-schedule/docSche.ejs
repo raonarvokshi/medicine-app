@@ -43,7 +43,7 @@
                     <td><%= schedule.doctor_name %></td>
                     <td><%= schedule.location_name %></td>
                     <td>
-                        <button class="btn btn-outline-primary btn-sm view-hours-btn"
+                        <button class="btn btn-outline-primary w-100 view-hours-btn"
                             data-doctor="<%= schedule.doctor_name %>"
                             data-hours='<%= JSON.stringify(schedule.weekday_hours) %>'
                             data-bs-toggle="modal"
@@ -90,7 +90,7 @@
         <!-- Doktori -->
         <div class="mb-3">
           <label class="form-label">Doktori</label>
-          <select class="form-select" name="doctor_id" required>
+          <select id="doctor-select" class="form-select" name="doctor_id" required>
             <option value="">Zgjedh doktorin</option>
             <% doctors.forEach(d => { %>
               <option value="<%= d.id %>"><%= d.full_name %></option>
@@ -101,7 +101,7 @@
         <!-- Njësia organizative -->
         <div class="mb-3">
           <label class="form-label">Njësia organizative</label>
-          <select class="form-select" name="location_id" required>
+          <select id="location-select" class="form-select" name="location_id" required>
             <option value="">Zgjedh njësinë</option>
             <% locations.forEach(l => { %>
               <option value="<%= l.id %>"><%= l.name %></option>
@@ -119,18 +119,18 @@
                     <div class="col-md-6 mb-2">
                         <label class="form-label"><%= day %></label>
                         <div class="input-group">
-                            <input type="time" class="form-control js-time-picker" name="weekday_hours[<%= day %>][start]">
+                            <input type="time" class="form-control time-picker" name="weekday_hours[<%= day %>][start]">
                             <span class="input-group-text">deri</span>
-                            <input type="time" class="form-control js-time-picker" name="weekday_hours[<%= day %>][end]">
+                            <input type="time" class="form-control time-picker" name="weekday_hours[<%= day %>][end]">
                         </div>
                     </div>
                 <% } else { %>
                     <div class="col-md-12 mb-2">
                         <label class="form-label"><%= day %></label>
                         <div class="input-group">
-                        <input type="time" class="form-control js-time-picker" name="weekday_hours[<%= day %>][start]">
+                        <input type="time" class="form-control time-picker" name="weekday_hours[<%= day %>][start]">
                         <span class="input-group-text">deri</span>
-                        <input type="time" class="form-control js-time-picker" name="weekday_hours[<%= day %>][end]">
+                        <input type="time" class="form-control time-picker" name="weekday_hours[<%= day %>][end]">
                         </div>
                     </div>
                 <% } %>
@@ -186,7 +186,7 @@
 
         <div class="mb-3">
           <label class="form-label">Doktori</label>
-          <select class="form-select" id="edit-doctor" name="doctor_id" required>
+          <select id="edit-doctor" class="form-select" id="edit-doctor" name="doctor_id" required>
             <% doctors.forEach(d => { %>
               <option value="<%= d.id %>"><%= d.full_name %></option>
             <% }) %>
@@ -195,7 +195,7 @@
 
         <div class="mb-3">
           <label class="form-label">Njësia organizative</label>
-          <select class="form-select" id="edit-location" name="location_id" required>
+          <select id="edit-location" class="form-select" id="edit-location" name="location_id" required>
             <% locations.forEach(l => { %>
               <option value="<%= l.id %>"><%= l.name %></option>
             <% }) %>
@@ -280,13 +280,41 @@
 <script src="/js/swal/swal.js"></script>
 
 <script>
-    // Shfaq Oraret - Modal Info
-    $('.view-hours-btn').on('click', function () {
+    // Inicializo Select2
+$('#doctor-select').select2({
+  dropdownParent: $('#addScheduleModal'), // ose emri i modalit ku ndodhet select-i
+  placeholder: "Zgjedh doktorin",
+  width: '100%'
+});
+
+$('#location-select').select2({
+    dropdownParent: $('#addScheduleModal'),
+    placeholder: "Zgjedh njesin organizative",
+    width: '100%',
+});
+
+// Inicializo Select2 për modalin e editimit
+$('#edit-doctor').select2({
+    dropdownParent: $('#editScheduleModal'),
+    placeholder: "Zgjedh doktorin",
+    width: '100%'
+});
+
+$('#edit-location').select2({
+    dropdownParent: $('#editScheduleModal'),
+    placeholder: "Zgjedh pacientin",
+    width: '100%',
+});
+</script>
+
+<script>
+  // Shfaq Oraret - Modal Info
+  $('.view-hours-btn').on('click', function () {
     const doctorName = $(this).data('doctor');
-    const hours = $(this).data('hours'); // kjo vjen si objekt JSON automatikisht me jQuery
+    const hours = $(this).data('hours');
     const orderedDays = [
-        "E Hënë", "E Martë", "E Mërkurë", "E Enjte",
-        "E Premte", "E Shtunë", "E Diel"
+      "E Hënë", "E Martë", "E Mërkurë", "E Enjte",
+      "E Premte", "E Shtunë", "E Diel"
     ];
 
     $('#modal-doctor-name').text(doctorName);
@@ -294,18 +322,25 @@
     $list.empty();
 
     orderedDays.forEach(day => {
-        if (hours[day]) {
-        const li = `
-            <li class="list-group-item d-flex justify-content-between">
-            <span><strong>${day}</strong></span>
-            <span>${hours[day].start} - ${hours[day].end}</span>
-            </li>`;
-        $list.append(li);
-        }
+      const dayData = hours[day];
+      let content = "";
+
+      if (dayData && dayData.start && dayData.end) {
+        content = `${dayData.start} - ${dayData.end}`;
+      } else {
+        content = `<span class="not-working__text">Nuk gjendet në pune</span>`;
+      }
+
+      const li = `
+        <li class="list-group-item d-flex justify-content-between">
+          <span><strong>${day}</strong></span>
+          <span>${content}</span>
+        </li>`;
+      $list.append(li);
     });
 
     $('#viewHoursModal').modal('show');
-    });
+  });
 
     // Edit Orari
     $('.edit-schedule-btn').on('click', function () {
