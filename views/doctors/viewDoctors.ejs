@@ -24,10 +24,10 @@
           <table id="doctorsTable" class="table table-bordered table-striped">
             <thead class="table-light">
               <tr>
-                <th>#</th>
+                <th style="width: 1%;">#</th>
                 <th>Emri</th>
                 <th>Departamenti</th>
-                <th>Tel</th>
+                <th style="width: 2%;">Tel</th>
                 <th>Email</th>
                 <th>Data krijimit</th>
                 <th>I perditsuar</th>
@@ -38,7 +38,7 @@
             <tbody>
               <% doctors.forEach((doctor, index) => { %>
                 <tr>
-                  <td><%= index + 1 %></td>
+                  <td style="width: 1%;"><%= index + 1 %></td>
                   <td><%= doctor.full_name %></td>
                   <td><%= doctor.department %></td>
                   <td><%= doctor.tel %></td>
@@ -58,23 +58,38 @@
                       <span>Jo</span>
                     <% } %>
                   </td>
-                  <td>
-                    <a href="#" class="btn btn-warning edit-doctor-btn"
-                      data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Perditso doktorin"
-                      data-id="<%= doctor.id %>"
-                      data-name="<%= doctor.full_name %>"
-                      data-department="<%= doctor.department %>"
-                      data-tel="<%= doctor.tel %>"
-                      data-email="<%= doctor.email %>">
-                      <i class="fa-solid fa-pen-to-square"></i>
-                    </a>
-                    <a href="#" class="btn btn-danger delete-doctor-btn"
-                      data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Fshij doktorin"
-                      data-id="<%= doctor.id %>"
-                      data-name="<%= doctor.full_name %>">
-                      <i class="fa-solid fa-trash"></i>
-                    </a>
+                  <td class="text-center">
+                    <div class="dropdown">
+                      <button class="btn border-0 bg-primary text-light" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Menaxho
+                      </button>
+                      <ul class="dropdown-menu">
+                        <li>
+                          <a class="dropdown-item" href="/doctor-report/<%= doctor.id %>">
+                            <i class="fa-solid fa-print me-2"></i> Printo
+                          </a>
+                        </li>
+                        <li>
+                          <a href="#" class="dropdown-item edit-doctor-btn"
+                            data-id="<%= doctor.id %>"
+                            data-name="<%= doctor.full_name %>"
+                            data-department="<%= doctor.department %>"
+                            data-tel="<%= doctor.tel %>"
+                            data-email="<%= doctor.email %>">
+                            <i class="fa-solid fa-pen-to-square me-2"></i> Përditëso
+                          </a>
+                        </li>
+                        <li>
+                          <a href="#" class="dropdown-item delete-doctor-btn"
+                            data-id="<%= doctor.id %>"
+                            data-name="<%= doctor.full_name %>">
+                            <i class="fa-solid fa-trash me-2"></i> Fshij
+                          </a>
+                        </li>
+                      </ul>
+                    </div>
                   </td>
+
                 </tr>
               <% }) %>
             </tbody>

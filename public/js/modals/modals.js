@@ -209,7 +209,7 @@ $('.view-hours-btn').on('click', function () {
         if (dayData && dayData.start && dayData.end) {
             content = `${dayData.start} - ${dayData.end}`;
         } else {
-            content = `<span class="not-working__text">Nuk gjendet në pune</span>`;
+            content = `<span class="not-working__text">Pushim</span>`;
         }
 
         const li = `

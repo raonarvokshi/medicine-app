@@ -65,6 +65,30 @@ router.post("/delete/doctor", authenticateToken, async (req, res) => {
     }
 });
 
+router.get('/doctor-report/:id', authenticateToken, async (req, res) => {
+    const doctorId = req.params.id;
+
+    try {
+        const doctor = await db.query('SELECT * FROM doctors WHERE id = $1', [doctorId]);
+        const appointments = await db.query(`
+      SELECT a.*, p.first_name || ' ' || p.last_name AS patient_name
+      FROM appointments a
+      JOIN patients p ON a.patient_id = p.id
+      WHERE a.doctor_id = $1
+      ORDER BY a.appointment_date DESC
+    `, [doctorId]);
+
+        res.render('reports/doctorReport.ejs', {
+            doctor: doctor.rows[0],
+            appointments: appointments.rows
+        });
+    } catch (err) {
+        console.error(err);
+        res.status(500).send("Gabim gjatë gjenerimit të raportit");
+    }
+});
+
+
 
 
 export default router;
