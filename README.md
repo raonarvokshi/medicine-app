@@ -1,5 +1,5 @@
 
-# Medicine App
+# PULSE (Medicine Web App)
 
 Nje web aplikacion ku te lejon me menagju kliniken apo spitalin tend.
 Mund te menagjosh doktor, pacienta, referues, njesi organizative, terminet dhe oraret e doktoreve poashtu te printosh edhe raporte te ndryshme
