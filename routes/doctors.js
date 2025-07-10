@@ -80,7 +80,15 @@ router.get('/doctor-report/:id', authenticateToken, async (req, res) => {
 
         res.render('reports/doctorReport.ejs', {
             doctor: doctor.rows[0],
-            appointments: appointments.rows
+            appointments: appointments.rows,
+            user: req.user,
+            activeMenu: "shenimet",
+            doctorsPage: true,
+            patientsPage: false,
+            locationPage: false,
+            appointmentsPage: false,
+            doctorsSchedulePage: false,
+            refPage: false
         });
     } catch (err) {
         console.error(err);

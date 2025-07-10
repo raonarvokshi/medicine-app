@@ -1,46 +1,89 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Raporti i Dr. <%= doctor.full_name %></title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-  <style>
-    @media print {
-      .no-print {
-        display: none;
-      }
+<%- include("../partials/header.ejs") %>
+<%- include("../partials/navbar.ejs") %>
+
+<style>
+  @media print {
+    .no-print {
+      display: none;
     }
-  </style>
-</head>
-<body class="container mt-4">
-  <h1 class="mb-3">Raporti i Dr. <%= doctor.full_name %></h1>
-  <p>Email: <%= doctor.email %></p>
-  <p>Departamenti: <%= doctor.department %></p>
 
-  <h3 class="mt-4">Terminet e fundit</h3>
-  <table class="table table-bordered">
-    <thead>
-      <tr>
-        <th>Pacienti</th>
-        <th>Data</th>
-        <th>Ora</th>
-        <th>Statusi</th>
-      </tr>
-    </thead>
-    <tbody>
-      <% appointments.forEach(a => { %>
-        <tr>
-          <td><%= a.patient_name %></td>
-          <td><%= new Date(a.appointment_date).toLocaleDateString() %></td>
-          <td><%= a.appointment_time.substring(0, 5) %></td>
-          <td><%= a.status %></td>
-        </tr>
-      <% }) %>
-    </tbody>
-  </table>
+    .print-logo {
+      display: block !important;
+      text-align: center;
+      margin-bottom: 20px;
+    }
 
-  <button onclick="window.print()" class="btn btn-success mt-3 no-print">
-    <i class="fa fa-print"></i> Printo
-  </button>
-</body>
-</html>
+    .print-logo-wrapper {
+      background-color: #737373 !important;
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+      width: 15%;
+      padding: 10px;
+    }
+
+    .print-logo-img {
+      max-height: 70px;
+    }
+  }
+
+  /* Në pamjen normale mos e shfaq logon e printit */
+  .print-logo {
+    display: none;
+  }
+</style>
+
+
+<div class="container-fluid">
+  <div class="row">
+    <%- include("../partials/sidebar.ejs") %>
+
+    <main class="col-lg-10 offset-lg-2 pt-4 px-4 min-vh-100">
+      <!-- Logo që shfaqet vetëm në print -->
+      <div class="print-logo">
+        <div class="print-logo-wrapper rounded">
+          <img src="/images/logo.png" alt="Logo" class="print-logo-img" />
+        </div>
+      </div>
+
+      <div>
+        <h1 class="mb-3 dash-page__title">Raporti i Dr. <%= doctor.full_name %></h1>
+        <p class="dash-page__title">Email: <%= doctor.email %></p>
+        <p class="dash-page__title">Departamenti: <%= doctor.department %></p>
+      </div>
+
+      <h3 class="mt-4 dash-page__title">Terminet e fundit</h3>
+
+      <div class="card shadow">
+        <div class="card-body">
+          <table class="table table-bordered table-striped">
+            <thead>
+              <tr>
+                <th>Pacienti</th>
+                <th>Data</th>
+                <th>Ora</th>
+                <th>Statusi</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% appointments.forEach(a => { %>
+                <tr>
+                  <td><%= a.patient_name %></td>
+                  <td><%= new Date(a.appointment_date).toLocaleDateString() %></td>
+                  <td><%= a.appointment_time.substring(0, 5) %></td>
+                  <td><%= a.status %></td>
+                </tr>
+              <% }) %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <button onclick="window.print()" class="btn btn-primary mt-3 no-print">
+        <i class="fa fa-print"></i> Printo
+      </button>
+
+    </main>
+  </div>
+</div>
+
+<%- include("../partials/footer.ejs") %>
