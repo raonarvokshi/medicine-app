@@ -10,11 +10,9 @@
         <button class="btn btn-lg add-doc__btn mb-3" data-bs-toggle="modal" data-bs-target="#addPatientModal">
           <i class="fas fa-plus-circle"></i> Shto pacient
         </button>
-          <div class="doctor-header ms-5">
-            <h1 class="dash-page__title">Shiko pacientat</h1>
-          </div>
-        <div class=""></div>
-        <div class=""></div>
+        <div class="doctor-header ms-5">
+          <h1 class="dash-page__title">Shiko pacientat</h1>
+        </div>
       </div>
 
       <div class="card shadow">
@@ -34,58 +32,71 @@
             <tbody>
               <% patients.forEach((patient, index) => { %>
                 <tr>
-                  <td style="width: 1%;"><%= index + 1 %></td>
+                  <td><%= index + 1 %></td>
                   <td><%= patient.first_name %></td>
                   <td><%= patient.parent_name %></td>
                   <td><%= patient.last_name %></td>
                   <td><%= patient.comment || "S'ka koment" %></td>
                   <td><%= patient.insurance_status === 'hasInsurance' ? 'Ka sigurim' : 'Ska sigurim' %></td>
                   <td>
-                    <a href="#" class="btn btn-info text-light view-patient-btn"
-                      data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Detajet e pacientit"
-                      data-id="<%= patient.id %>"
-                      data-first="<%= patient.first_name %>"
-                      data-parent="<%= patient.parent_name %>"
-                      data-last="<%= patient.last_name %>"
-                      data-gender="<%= patient.gender %>"
-                      data-email="<%= patient.email %>"
-                      data-birthday="<%= patient.birthday %>"
-                      data-age-type="<%= patient.age_type %>"
-                      data-comment="<%= patient.comment %>"
-                      data-insurance="<%= patient.insurance_status %>"
-                      data-city="<%= patient.city %>"
-                      data-address="<%= patient.address %>"
-                      data-personalnum="<%= patient.personal_number %>"
-                      data-updated="<%= patient.updated_at %>">
-                      <i class="fa-solid fa-circle-info"></i>
-                    </a>
-
-                    <a href="#" class="btn btn-warning text-white edit-patient-btn"
-                      data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Perditso pacientin"
-                      data-id="<%= patient.id %>"
-                      data-first="<%= patient.first_name %>"
-                      data-parent="<%= patient.parent_name %>"
-                      data-last="<%= patient.last_name %>"
-                      data-gender="<%= patient.gender %>"
-                      data-email="<%= patient.email %>"
-                      data-birthday="<%= patient.birthday %>"
-                      data-age-type="<%= patient.age_type %>"
-                      data-comment="<%= patient.comment %>"
-                      data-insurance="<%= patient.insurance_status %>"
-                      data-city="<%= patient.city %>"
-                      data-address="<%= patient.address %>"
-                      data-personalnum="<%= patient.personal_number %>">
-                      <i class="fa-solid fa-pen-to-square"></i>
-                    </a>
-                    
-                    <a href="#" class="btn btn-danger delete-patient-btn"
-                      data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Fshij pacientin"
-                      data-id="<%= patient.id %>"
-                      data-first="<%= patient.first_name %>"
-                      data-parent="<%= patient.parent_name %>"
-                      data-last="<%= patient.last_name %>">
-                      <i class="fa-solid fa-trash"></i>
-                    </a>
+                    <div class="dropdown">
+                      <button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Menaxho
+                      </button>
+                      <ul class="dropdown-menu action-dropdown">
+                        <li>
+                          <a href="#" class="dropdown-item view-patient-btn"
+                            data-id="<%= patient.id %>"
+                            data-first="<%= patient.first_name %>"
+                            data-parent="<%= patient.parent_name %>"
+                            data-last="<%= patient.last_name %>"
+                            data-gender="<%= patient.gender %>"
+                            data-email="<%= patient.email %>"
+                            data-birthday="<%= patient.birthday %>"
+                            data-age-type="<%= patient.age_type %>"
+                            data-comment="<%= patient.comment %>"
+                            data-insurance="<%= patient.insurance_status %>"
+                            data-city="<%= patient.city %>"
+                            data-address="<%= patient.address %>"
+                            data-personalnum="<%= patient.personal_number %>"
+                            data-updated="<%= patient.updated_at %>">
+                            <i class="fa-solid fa-circle-info me-1 text-primary fs-5"></i> 
+                            <span class="action-dropdown__text">
+                              Detajet
+                            </span>
+                          </a>
+                        </li>
+                        <li>
+                          <a href="#" class="dropdown-item edit-patient-btn"
+                            data-id="<%= patient.id %>"
+                            data-first="<%= patient.first_name %>"
+                            data-parent="<%= patient.parent_name %>"
+                            data-last="<%= patient.last_name %>"
+                            data-gender="<%= patient.gender %>"
+                            data-email="<%= patient.email %>"
+                            data-birthday="<%= patient.birthday %>"
+                            data-age-type="<%= patient.age_type %>"
+                            data-comment="<%= patient.comment %>"
+                            data-insurance="<%= patient.insurance_status %>"
+                            data-city="<%= patient.city %>"
+                            data-address="<%= patient.address %>"
+                            data-personalnum="<%= patient.personal_number %>">
+                            <i class="fa-solid fa-pen-to-square me-1 text-warning fs-5"></i>
+                            <span class="action-dropdown__text">Përditëso</span>
+                          </a>
+                        </li>
+                        <li>
+                          <a href="#" class="dropdown-item text-danger delete-patient-btn"
+                            data-id="<%= patient.id %>"
+                            data-first="<%= patient.first_name %>"
+                            data-parent="<%= patient.parent_name %>"
+                            data-last="<%= patient.last_name %>">
+                            <i class="fa-solid fa-trash me-1 text-danger fs-5"></i>
+                            <span class="action-dropdown__text">Fshij</span>
+                          </a>
+                        </li>
+                      </ul>
+                    </div>
                   </td>
                 </tr>
               <% }) %>
@@ -109,12 +120,10 @@
 </div>
 
 <%- include("../partials/modals/patientModals.ejs") %>
-
 <%- include("../partials/dataTables.ejs") %>
+
 <!-- MY SCRIPTS -->
 <script src="/js/tables/tables.js"></script>
 <script src="/js/modals/modals.js"></script>
 <script src="/js/swal/swal.js"></script>
-
-
 <%- include("../partials/footer.ejs") %>

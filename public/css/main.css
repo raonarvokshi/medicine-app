@@ -667,3 +667,16 @@ body.dark-mode #modal-hours-list .list-group-item {
 body.dark-mode .not-working__text {
     color: #fff;
 }
+
+body.dark-mode .action-dropdown {
+    background-color: #444343;
+}
+
+body.dark-mode .action-dropdown__text {
+    color: #fff;
+    font-size: 18px;
+}
+
+body.dark-mode .action-dropdown li .dropdown-item:hover {
+    background-color: #55585b;
+}
