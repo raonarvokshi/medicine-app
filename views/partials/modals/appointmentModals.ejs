@@ -1,0 +1,138 @@
+<!-- Modal -->
+<div class="modal fade" id="addAppointmentModal" tabindex="-1" aria-labelledby="addAppointmentModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <form action="/add/appointment" method="POST" class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Shto Terminin</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="mb-3">
+          <label class="form-label">Doktori</label>
+          <select class="form-select" id="doctorSelect" name="doctor_id" required>
+            <option value="">Zgjedh doktorin</option>
+            <% doctors.forEach(d => { %>
+              <option value="<%= d.id %>"><%= d.full_name %></option>
+            <% }) %>
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label">Pacienti</label>
+          <select class="form-select" id="patientSelect" name="patient_id" required>
+            <option value="">Zgjedh pacientin</option>
+            <% patients.forEach(p => { %>
+              <option value="<%= p.id %>"><%= p.first_name %> <%= p.last_name %></option>
+            <% }) %>
+          </select>
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Data</label>
+          <input type="text" class="form-control" id="datepicker" name="date" required>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label">Ora</label>
+          <select class="form-select js-time-picker" name="time" disabled required>
+            <option value="">Zgjedh orarin</option>
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label">Statusi</label>
+          <select class="form-select" name="status" required>
+            <option value="I caktuar">I caktuar</option>
+            <option value="I anuluar">I anuluar</option>
+            <option value="I kryer">I kryer</option>
+          </select>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="submit" class="btn btn-primary">Ruaj</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+
+<!-- Modal për Editim Termini -->
+<div class="modal fade" id="editAppointmentModal" tabindex="-1" aria-labelledby="editAppointmentLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <form action="/edit/appointment" method="POST" class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Ndrysho Terminin</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Mbyll"></button>
+      </div>
+      <div class="modal-body">
+        <input type="hidden" name="id" id="edit-id">
+
+        <div class="mb-3">
+          <label class="form-label">Doktori</label>
+          <select class="form-select" id="edit-doctor" name="doctor_id" required>
+            <% doctors.forEach(d => { %>
+              <option value="<%= d.id %>"><%= d.full_name %></option>
+            <% }) %>
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label">Pacienti</label>
+          <select class="form-select" id="edit-patient" name="patient_id" required>
+            <% patients.forEach(p => { %>
+              <option value="<%= p.id %>"><%= p.first_name %> <%= p.last_name %></option>
+            <% }) %>
+          </select>
+        </div>
+
+        <!-- Data (me datepicker) -->
+        <div class="mb-3">
+          <label class="form-label">Data</label>
+          <input type="text" class="form-control" id="edit-datepicker" name="date" required>
+        </div>
+
+        <!-- Ora (select që mbushet me slotet) -->
+        <div class="mb-3">
+          <label class="form-label">Ora</label>
+          <select class="form-select js-edit-time-picker" id="edit-time" name="time" disabled required>
+            <option value="">Zgjedh orarin</option>
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label">Statusi</label>
+          <select class="form-select" name="status" id="edit-status" required>
+            <option value="I caktuar">I caktuar</option>
+            <option value="I anuluar">I anuluar</option>
+            <option value="I kryer">I kryer</option>
+          </select>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="submit" class="btn btn-primary">Ruaj Ndryshimet</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+
+<!-- Modal për Fshirje Termini -->
+<div class="modal fade" id="deleteAppointmentModal" tabindex="-1" aria-labelledby="deleteAppointmentLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <form action="/delete/appointment" method="POST" class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title text-danger" id="deleteAppointmentLabel">
+          <i class="fa-solid fa-trash"></i>&nbsp; Konfirmo fshirjen
+        </h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Mbyll"></button>
+      </div>
+      <div class="modal-body">
+        <input type="hidden" name="id" id="delete-id">
+        <p>A jeni i sigurt që dëshironi të fshini këtë termin?</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Anulo</button>
+        <button type="submit" class="btn btn-danger">Fshij</button>
+      </div>
+    </form>
+  </div>
+</div>

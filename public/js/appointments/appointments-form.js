@@ -101,13 +101,17 @@ $(function () {
                     $timeSel.html('<option value="">Nuk ka orare</option>').prop('disabled', true);
                     return;
                 }
-                const opts = res.times.map(t => `<option value="${t}">${t}</option>`).join('');
-                $timeSel.html(opts).prop('disabled', false);
 
-                // nëse kemi already një orë të paracaktuar (rast EDIT) – e selektojmë:
-                if (config.preTime) $timeSel.val(config.preTime);
+                let opts = '';
+                res.times.forEach(t => {
+                    const selected = config.preTime?.substring(0, 5) === t ? 'selected' : '';
+                    opts += `<option value="${t}" ${selected}>${t}</option>`;
+                });
+
+                $timeSel.html(opts).prop('disabled', false);
             });
         }
+
 
         // Në rast EDIT – në momentin që modali hapet,
         // fusim vlerat ekzistuese dhe thërrasim manualisht loadTimes
@@ -135,6 +139,15 @@ $(function () {
     ========================================================== */
     $('.edit-appointment-btn').on('click', function () {
         const $btn = $(this);
+        // Inicializo select2 për elementët e modalit EDIT nëse nuk janë tashmë
+        if (!$('#edit-doctor').hasClass("select2-hidden-accessible")) {
+            $('#edit-doctor').select2({ dropdownParent: $('#editAppointmentModal') });
+        }
+        if (!$('#edit-patient').hasClass("select2-hidden-accessible")) {
+            $('#edit-patient').select2({ dropdownParent: $('#editAppointmentModal') });
+        }
+
+        // pjesa tjetër e kodit...
 
         // paraplotëso fushat (kishit këtë logjikë diku tjetër – ruajeni)
         $('#edit-id').val($btn.data('id'));

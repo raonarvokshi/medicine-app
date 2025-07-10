@@ -17,6 +17,8 @@ const app = express();
 const PORT = process.env.PORT;
 const SECRET_KEY = process.env.SECRET_KEY;
 
+//* TODO ERRORIN PE SHFAQ NE CONSOLE KUR PO DU ME BO EDIT TERMININ ME NDRRU DOKTORIN
+
 app.use(express.static("public"));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());

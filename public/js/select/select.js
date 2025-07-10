@@ -1,53 +1,79 @@
-// Inicializo Select2
-$('#doctorSelect').select2({
-    dropdownParent: $('#addAppointmentModal'), // Shfaqet korrekt brenda modalit
-    placeholder: "Zgjedh doktorin",
-    width: '100%'
-});
+// ==============================
+// Select2 - Modal Shto Appointment
+// ==============================
+if ($('#addAppointmentModal').length) {
+    $('#doctorSelect').select2({
+        dropdownParent: $('#addAppointmentModal'),
+        placeholder: "Zgjedh doktorin",
+        width: '100%'
+    });
 
-$('#patientSelect').select2({
-    dropdownParent: $('#addAppointmentModal'),
-    placeholder: "Zgjedh pacientin",
-    width: '100%'
-});
+    $('#patientSelect').select2({
+        dropdownParent: $('#addAppointmentModal'),
+        placeholder: "Zgjedh pacientin",
+        width: '100%'
+    });
+}
 
-// Inicializo Select2 për modalin e editimit
-$('#edit-doctor').select2({
-    dropdownParent: $('#editAppointmentModal'),
-    placeholder: "Zgjedh doktorin",
-    width: '100%'
-});
+// ==============================
+// Select2 - Modal Edit Appointment
+// ==============================
+if ($('#editAppointmentModal').length) {
+    const $editModal = $('#editAppointmentModal');
 
-$('#edit-patient').select2({
-    dropdownParent: $('#editAppointmentModal'),
-    placeholder: "Zgjedh pacientin",
-    width: '100%'
-});
+    if ($('#edit-doctor').closest($editModal).length) {
+        $('#edit-doctor').select2({
+            dropdownParent: $editModal,
+            placeholder: "Zgjedh doktorin",
+            width: '100%'
+        });
+    }
 
+    if ($('#edit-patient').closest($editModal).length) {
+        $('#edit-patient').select2({
+            dropdownParent: $editModal,
+            placeholder: "Zgjedh pacientin",
+            width: '100%'
+        });
+    }
+}
 
+// ==============================
+// Select2 - Modal Shto Orar (Schedule)
+// ==============================
+if ($('#addScheduleModal').length) {
+    $('#doctor-select').select2({
+        dropdownParent: $('#addScheduleModal'),
+        placeholder: "Zgjedh doktorin",
+        width: '100%'
+    });
 
-// Inicializo Select2
-$('#doctor-select').select2({
-    dropdownParent: $('#addScheduleModal'), // ose emri i modalit ku ndodhet select-i
-    placeholder: "Zgjedh doktorin",
-    width: '100%'
-});
+    $('#location-select').select2({
+        dropdownParent: $('#addScheduleModal'),
+        placeholder: "Zgjedh njësinë organizative",
+        width: '100%'
+    });
+}
 
-$('#location-select').select2({
-    dropdownParent: $('#addScheduleModal'),
-    placeholder: "Zgjedh njesin organizative",
-    width: '100%',
-});
+// ==============================
+// Select2 - Modal Edito Orar (Schedule)
+// ==============================
+if ($('#editScheduleModal').length) {
+    const $editScheduleModal = $('#editScheduleModal');
 
-// Inicializo Select2 për modalin e editimit
-$('#edit-doctor').select2({
-    dropdownParent: $('#editScheduleModal'),
-    placeholder: "Zgjedh doktorin",
-    width: '100%'
-});
+    if ($('#edit-doctor').closest($editScheduleModal).length) {
+        $('#edit-doctor').select2({
+            dropdownParent: $editScheduleModal,
+            placeholder: "Zgjedh doktorin",
+            width: '100%'
+        });
+    }
 
-$('#edit-location').select2({
-    dropdownParent: $('#editScheduleModal'),
-    placeholder: "Zgjedh pacientin",
-    width: '100%',
-});
+    if ($('#edit-location').closest($editScheduleModal).length) {
+        $('#edit-location').select2({
+            dropdownParent: $editScheduleModal,
+            placeholder: "Zgjedh njësinë organizative",
+            width: '100%'
+        });
+    }
+}
